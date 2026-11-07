@@ -9,7 +9,7 @@
 <meta property="og:title" content="Kuku Promo Finder — Find the Promos">
 <meta property="og:description" content="Kuku AI Generalist Assignment, Problem 1. 3,727 beats parsed, 200 candidates judged, 20 ranked promos.">
 <meta property="og:type" content="article">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#127916;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
@@ -467,9 +467,61 @@
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; animation: none !important; }
   }
+
+  /* ---- promo cards ------------------------------------------------------ */
+  .promos { display: grid; gap: .6rem; margin: 0 0 1.2rem; }
+  .promo {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--r); padding: .9rem 1rem 1rem;
+  }
+  .phead {
+    display: flex; flex-wrap: wrap; align-items: center; gap: .45rem .6rem;
+    padding-bottom: .6rem; margin-bottom: .6rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .rank {
+    font-family: var(--mono); font-size: .8rem; font-weight: 700;
+    font-variant-numeric: tabular-nums; color: var(--ground);
+    background: var(--orange-lit); border-radius: 6px;
+    padding: .12rem .4rem; flex: none;
+  }
+  .ptc { display: flex; flex-wrap: wrap; gap: .3rem; flex: 1 1 auto; }
+  .tc {
+    font-family: var(--mono); font-size: .8rem; font-weight: 600;
+    font-variant-numeric: tabular-nums; color: var(--ink);
+    background: var(--surface-2); border: 1px solid var(--line);
+    border-radius: 6px; padding: .1rem .42rem; white-space: nowrap;
+  }
+  .chip {
+    font-family: var(--mono); font-size: .66rem; font-weight: 600;
+    letter-spacing: .07em; text-transform: uppercase;
+    border-radius: 100px; padding: .16rem .5rem; flex: none;
+  }
+  .chip.dur { color: var(--ink-faint); border: 1px solid var(--line-firm); }
+  .chip.stitch { color: var(--amber); border: 1px solid var(--amber); }
+  .pbody { margin: 0; display: grid; gap: .1rem .8rem; grid-template-columns: 1fr; }
+  .pbody dt {
+    font-family: var(--mono); font-size: .62rem; font-weight: 600;
+    letter-spacing: .11em; text-transform: uppercase; color: var(--orange);
+    margin-top: .45rem;
+  }
+  .pbody dt:first-child { margin-top: 0; }
+  .pbody dd { margin: 0; font-size: .92rem; }
+  .pbody dd.why { color: var(--ink-soft); font-style: italic; }
+  .pscores {
+    display: flex; flex-wrap: wrap; gap: .35rem .9rem;
+    margin-top: .75rem; padding-top: .6rem;
+    border-top: 1px dashed var(--line);
+    font-family: var(--mono); font-size: .72rem; color: var(--ink-faint);
+  }
+  .pscores b {
+    color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums;
+  }
+  .pscores .sp b { color: var(--good); }
+  .note { font-size: .88rem; color: var(--ink-faint); }
+  .note code { font-size: .85em; }
 </style>
 <style>
-  /* Reset the artifact host normally provides. */
   html { color-scheme: light dark; }
   body { margin: 0; }
   img { max-width: 100%; }
@@ -610,8 +662,215 @@
     </p>
   </section>
 
+
+  <section id="output">
+    <p class="eyebrow">04 — The actual output</p>
+    <h2>What it produced</h2>
+    <p>
+      The real top 10 from one full run over all 50 episodes, unedited. Every
+      timecode below was taken from the screenplay by code and verified back
+      against the source &mdash; none of it was written by the model.
+    </p>
+    <div class="promos">
+      <article class="promo">
+        <div class="phead">
+          <span class="rank">01</span>
+          <div class="ptc"><span class="tc">Ep 03 01:17.20-02:16.20</span></div>
+          <span class="chip dur">59s</span>
+          
+        </div>
+        <dl class="pbody">
+          <dt>Hook</dt><dd>A mysterious, scarred stranger steps into a chapel and effortlessly takes down a royal guard with a single strike.</dd>
+          <dt>Cliffhanger</dt><dd>The stranger drops to one knee to propose to a woman he just met, leaving the entire congregation in stunned silence.</dd>
+          <dt>Why it works</dt><dd class="why">It hits the 'protector' trope perfectly, moving from high-stakes physical conflict to a romantic, high-society scandal in under a minute.</dd>
+        </dl>
+        <div class="pscores">
+          <span><b>5</b>/5 hook</span>
+          <span><b>5</b>/5 cliff</span>
+          <span><b>5</b>/5 standalone</span>
+          <span class="sp"><b>1</b>/5 spoiler</span>
+        </div>
+      </article>
+      <article class="promo">
+        <div class="phead">
+          <span class="rank">02</span>
+          <div class="ptc"><span class="tc">Ep 03 01:00.50-01:25.50</span><span class="tc">Ep 07 00:50.80-01:15.50</span></div>
+          <span class="chip dur">50s</span>
+          <span class="chip stitch">2 segments</span>
+        </div>
+        <dl class="pbody">
+          <dt>Hook</dt><dd>A woman is being forcefully dragged away by guards in a cathedral while screaming for help.</dd>
+          <dt>Cliffhanger</dt><dd>The antagonist threatens the protagonist's husband just as the mysterious, scarred man emerges from the forest mist.</dd>
+          <dt>Why it works</dt><dd class="why">Opens on the strongest hook in the show and cuts to the hardest unresolved beat: The antagonist threatens the protagonist's husband just as the mysterious, scarred man emerges from the forest mist.</dd>
+        </dl>
+        <div class="pscores">
+          <span><b>5</b>/5 hook</span>
+          <span><b>5</b>/5 cliff</span>
+          <span><b>5</b>/5 standalone</span>
+          <span class="sp"><b>2</b>/5 spoiler</span>
+        </div>
+      </article>
+      <article class="promo">
+        <div class="phead">
+          <span class="rank">03</span>
+          <div class="ptc"><span class="tc">Ep 10 00:02.60-00:31.80</span></div>
+          <span class="chip dur">29s</span>
+          
+        </div>
+        <dl class="pbody">
+          <dt>Hook</dt><dd>A wounded, blood-soaked man stumbles into a quiet cottage, immediately establishing high stakes.</dd>
+          <dt>Cliffhanger</dt><dd>The clip cuts just as the man begins to remove his coat, leaving the severity of his injuries and the tension between the couple unresolved.</dd>
+          <dt>Why it works</dt><dd class="why">The immediate visual of a wounded protagonist combined with the power dynamic shift between the characters creates instant intrigue for a casual viewer.</dd>
+        </dl>
+        <div class="pscores">
+          <span><b>5</b>/5 hook</span>
+          <span><b>4</b>/5 cliff</span>
+          <span><b>5</b>/5 standalone</span>
+          <span class="sp"><b>1</b>/5 spoiler</span>
+        </div>
+      </article>
+      <article class="promo">
+        <div class="phead">
+          <span class="rank">04</span>
+          <div class="ptc"><span class="tc">Ep 15 00:44.80-01:07.50</span></div>
+          <span class="chip dur">23s</span>
+          
+        </div>
+        <dl class="pbody">
+          <dt>Hook</dt><dd>A thug aggressively shoves a woman to the ground, causing her to crash onto a stone path.</dd>
+          <dt>Cliffhanger</dt><dd>The scene cuts just as the hero, Alexander, charges into the scene to confront the thugs.</dd>
+          <dt>Why it works</dt><dd class="why">It combines high-stakes physical conflict with a clear 'damsel in distress' trope that triggers an immediate desire for retribution.</dd>
+        </dl>
+        <div class="pscores">
+          <span><b>5</b>/5 hook</span>
+          <span><b>4</b>/5 cliff</span>
+          <span><b>5</b>/5 standalone</span>
+          <span class="sp"><b>1</b>/5 spoiler</span>
+        </div>
+      </article>
+      <article class="promo">
+        <div class="phead">
+          <span class="rank">05</span>
+          <div class="ptc"><span class="tc">Ep 45 01:26.50-02:01.75</span></div>
+          <span class="chip dur">35s</span>
+          
+        </div>
+        <dl class="pbody">
+          <dt>Hook</dt><dd>The cathedral doors slam open violently, interrupting a wedding with a booming declaration of invalidity.</dd>
+          <dt>Cliffhanger</dt><dd>The protagonist is publicly shamed as a fraud, and the antagonist reveals a triumphant, venomous smile.</dd>
+          <dt>Why it works</dt><dd class="why">It delivers high-stakes public humiliation and a clear 'us against the world' conflict that hooks viewers immediately.</dd>
+        </dl>
+        <div class="pscores">
+          <span><b>5</b>/5 hook</span>
+          <span><b>5</b>/5 cliff</span>
+          <span><b>4</b>/5 standalone</span>
+          <span class="sp"><b>2</b>/5 spoiler</span>
+        </div>
+      </article>
+      <article class="promo">
+        <div class="phead">
+          <span class="rank">06</span>
+          <div class="ptc"><span class="tc">Ep 05 00:54.50-01:14.50</span><span class="tc">Ep 09 01:17.50-01:41.20</span></div>
+          <span class="chip dur">44s</span>
+          <span class="chip stitch">2 segments</span>
+        </div>
+        <dl class="pbody">
+          <dt>Hook</dt><dd>A woman's precious family heirloom is violently snatched and thrown into a muddy puddle in front of a crowd.</dd>
+          <dt>Cliffhanger</dt><dd>A servant reveals that a war veteran in the village bears the exact same scar as the late Duke, threatening the protagonist's secret identity.</dd>
+          <dt>Why it works</dt><dd class="why">Opens on the strongest hook in the show and cuts to the hardest unresolved beat: A servant reveals that a war veteran in the village bears the exact same scar as the late Duke, threatening the protagonist's secret identity.</dd>
+        </dl>
+        <div class="pscores">
+          <span><b>5</b>/5 hook</span>
+          <span><b>5</b>/5 cliff</span>
+          <span><b>4</b>/5 standalone</span>
+          <span class="sp"><b>2</b>/5 spoiler</span>
+        </div>
+      </article>
+      <article class="promo">
+        <div class="phead">
+          <span class="rank">07</span>
+          <div class="ptc"><span class="tc">Ep 24 00:29.00-00:57.60</span></div>
+          <span class="chip dur">29s</span>
+          
+        </div>
+        <dl class="pbody">
+          <dt>Hook</dt><dd>A cruel noblewoman dismisses a dying woman's suffering and violently strikes the protagonist with a riding crop.</dd>
+          <dt>Cliffhanger</dt><dd>Juliana is forced to scrub a massive, soot-covered hearth, leaving her secret mission to save the Duchess in jeopardy.</dd>
+          <dt>Why it works</dt><dd class="why">The immediate physical violence and the classic 'arrogant villain vs. underdog' dynamic create instant emotional stakes that hook viewers.</dd>
+        </dl>
+        <div class="pscores">
+          <span><b>5</b>/5 hook</span>
+          <span><b>4</b>/5 cliff</span>
+          <span><b>5</b>/5 standalone</span>
+          <span class="sp"><b>2</b>/5 spoiler</span>
+        </div>
+      </article>
+      <article class="promo">
+        <div class="phead">
+          <span class="rank">08</span>
+          <div class="ptc"><span class="tc">Ep 32 01:56.90-02:22.30</span></div>
+          <span class="chip dur">25s</span>
+          
+        </div>
+        <dl class="pbody">
+          <dt>Hook</dt><dd>Juliana tells her captor that despite all her power, she has never learned how to make anyone love her.</dd>
+          <dt>Cliffhanger</dt><dd>The clip cuts just as the captor is about to strike with a red-hot branding iron while Juliana continues to mock her.</dd>
+          <dt>Why it works</dt><dd class="why">The high-stakes power dynamic between a chained, defiant victim and a hysterical, weapon-wielding villain creates immediate, visceral tension.</dd>
+        </dl>
+        <div class="pscores">
+          <span><b>5</b>/5 hook</span>
+          <span><b>4</b>/5 cliff</span>
+          <span><b>5</b>/5 standalone</span>
+          <span class="sp"><b>2</b>/5 spoiler</span>
+        </div>
+      </article>
+      <article class="promo">
+        <div class="phead">
+          <span class="rank">09</span>
+          <div class="ptc"><span class="tc">Ep 16 00:19.20-00:44.00</span></div>
+          <span class="chip dur">25s</span>
+          
+        </div>
+        <dl class="pbody">
+          <dt>Hook</dt><dd>A man effortlessly dismantles three armed thugs in a brutal display of combat skill.</dd>
+          <dt>Cliffhanger</dt><dd>Alexander corners the final thug and demands to know who sent him, leaving the mastermind's identity hanging in the balance.</dd>
+          <dt>Why it works</dt><dd class="why">The 'hidden badass' trope is highly effective for vertical drama, and the transition from high-octane violence to the mystery of the mastermind creates a perfect loop for engagement.</dd>
+        </dl>
+        <div class="pscores">
+          <span><b>4</b>/5 hook</span>
+          <span><b>5</b>/5 cliff</span>
+          <span><b>5</b>/5 standalone</span>
+          <span class="sp"><b>2</b>/5 spoiler</span>
+        </div>
+      </article>
+      <article class="promo">
+        <div class="phead">
+          <span class="rank">10</span>
+          <div class="ptc"><span class="tc">Ep 34 01:42.30-02:41.80</span></div>
+          <span class="chip dur">60s</span>
+          
+        </div>
+        <dl class="pbody">
+          <dt>Hook</dt><dd>An angry woman in a courtroom accuses the protagonist of poisoning her daughter with herbal medicine.</dd>
+          <dt>Cliffhanger</dt><dd>The judge threatens that the protagonist's refusal to repent will be treated as proof of witchcraft, leaving her fate hanging in the balance.</dd>
+          <dt>Why it works</dt><dd class="why">The high-stakes 'trial by fire' scenario combined with the protagonist's defiant refusal to back down creates immediate tension that keeps the viewer watching to see if she survives.</dd>
+        </dl>
+        <div class="pscores">
+          <span><b>4</b>/5 hook</span>
+          <span><b>5</b>/5 cliff</span>
+          <span><b>5</b>/5 standalone</span>
+          <span class="sp"><b>2</b>/5 spoiler</span>
+        </div>
+      </article>
+    </div>
+    <p class="note">
+      All 20 promos, plus every rejected candidate and the model&rsquo;s reasoning,
+      are in <a href="https://github.com/Anshu2003-commits/Kuku_assignment/tree/main/outputs"><code>outputs/</code></a>.
+    </p>
+  </section>
+
   <section>
-    <p class="eyebrow">04 — Quality checking</p>
+    <p class="eyebrow">05 — Quality checking</p>
     <h2>Does it work?</h2>
 
     <div class="stats">
@@ -670,7 +929,7 @@
   </section>
 
   <section>
-    <p class="eyebrow">05 — Honest failures</p>
+    <p class="eyebrow">06 — Honest failures</p>
     <h2>Where it picks badly</h2>
 
     <div class="fails">
@@ -715,7 +974,7 @@
   </section>
 
   <section>
-    <p class="eyebrow">06 — Scale</p>
+    <p class="eyebrow">07 — Scale</p>
     <h2>Cost at real volume</h2>
     <p>
       200 calls per show, roughly 230k tokens. Two free-tier limits bind:
@@ -735,7 +994,7 @@
   </section>
 
   <section>
-    <p class="eyebrow">07 — Tooling</p>
+    <p class="eyebrow">08 — Tooling</p>
     <h2>Where the AI got it wrong</h2>
     <p>
       Built with <strong>Claude (Claude Code)</strong>; <strong>Gemini 3.1 Flash Lite</strong>
@@ -768,7 +1027,7 @@
   </section>
 
   <section>
-    <p class="eyebrow">08 — Next</p>
+    <p class="eyebrow">09 — Next</p>
     <h2>What I&rsquo;d do next</h2>
     <ul class="clean">
       <li><span>
