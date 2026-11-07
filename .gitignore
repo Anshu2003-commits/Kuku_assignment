@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Secrets - never commit an API key
+.env
+.env.*
+*.key
+
+# Kuku's input pack is confidential: shared for this assignment only, not to
+# be published. The pack lives outside this folder; these are belt-and-braces
+# in case it is ever copied in.
+*episode-*.txt
+I Married a Broken Soldier*/
+scripts/
+
+# Build artefacts.
+# SOLUTION.html is the print view, used only to export the PDF.
+SOLUTION.html
+streamlit.log
+run.log
+st.log
+outputs_test/
+
+# For recording the walkthrough only - not part of the submission.
+VIDEO_SCRIPT.md

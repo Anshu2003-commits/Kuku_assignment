@@ -1,0 +1,314 @@
+{
+  "show": "I Married a Broken Soldier. He was a Duke",
+  "input_dir": "..\\I Married a Broken Soldier. He was a Duke-scripts (2)\\I Married a Broken Soldier. He was a Duke",
+  "n_episodes": 50,
+  "n_beats": 3727,
+  "n_candidates": 200,
+  "n_judged": 200,
+  "n_kept": 152,
+  "model": "gemini:gemini-3.1-flash-lite",
+  "elapsed_s": 980.05,
+  "parse_warnings": [],
+  "llm_notes": [],
+  "judge_errors": [],
+  "boundary_flags": [
+    {
+      "episode": 8,
+      "start": "E08.B041",
+      "flags": [
+        "boundary_duration_19.5s_out_of_range"
+      ]
+    },
+    {
+      "episode": 16,
+      "start": "E16.B041",
+      "flags": [
+        "boundary_duration_14.2s_out_of_range"
+      ]
+    },
+    {
+      "episode": 17,
+      "start": "E17.B032",
+      "flags": [
+        "boundary_duration_19.4s_out_of_range"
+      ]
+    },
+    {
+      "episode": 19,
+      "start": "E19.B013",
+      "flags": [
+        "boundary_duration_19.8s_out_of_range"
+      ]
+    },
+    {
+      "episode": 21,
+      "start": "E21.B034",
+      "flags": [
+        "boundary_duration_17.4s_out_of_range"
+      ]
+    },
+    {
+      "episode": 21,
+      "start": "E21.B021",
+      "flags": [
+        "boundary_duration_19.8s_out_of_range"
+      ]
+    },
+    {
+      "episode": 28,
+      "start": "E28.B079",
+      "flags": [
+        "boundary_duration_19.9s_out_of_range"
+      ]
+    },
+    {
+      "episode": 39,
+      "start": "E39.B029",
+      "flags": [
+        "boundary_duration_18.5s_out_of_range"
+      ]
+    }
+  ],
+  "rejects": [
+    {
+      "episode": 5,
+      "start": "E05.B052",
+      "reason": "The clip lacks a high-stakes hook and the ending is a resolution rather than a cliffhanger."
+    },
+    {
+      "episode": 6,
+      "start": "E06.B070",
+      "reason": "The clip lacks a hook and tension; it is a slow, atmospheric scene that fails to stop a scroll."
+    },
+    {
+      "episode": 6,
+      "start": "E06.B055",
+      "reason": "The clip is too slow and lacks a compelling hook or high-stakes conflict to stop a scroll."
+    },
+    {
+      "episode": 6,
+      "start": "E06.B036",
+      "reason": "The clip lacks a high-stakes hook and the pacing is too slow for a microdrama; it feels like a scene from a period drama rather than a viral hook."
+    },
+    {
+      "episode": 6,
+      "start": "E06.B012",
+      "reason": "The clip lacks a high-stakes hook and the pacing is too slow for a social media audience; it feels like a quiet scene from a period drama rather than a gripping microdrama promo."
+    },
+    {
+      "episode": 7,
+      "start": "E07.B043",
+      "reason": "The clip lacks a high-stakes hook and ends on a resolution rather than a cliffhanger, making it feel like a standard scene rather than a viral promo."
+    },
+    {
+      "episode": 8,
+      "start": "E08.B012",
+      "reason": "The clip is too slow and lacks a high-stakes hook; it is a domestic bonding scene that fails to grab a scrolling viewer's attention."
+    },
+    {
+      "episode": 8,
+      "start": "E08.B019",
+      "reason": "The clip lacks a high-stakes hook and the 'cliffhanger' is merely a romantic domestic moment that fails to generate enough tension for a scroll-stopper."
+    },
+    {
+      "episode": 8,
+      "start": "E08.B041",
+      "reason": "The clip is too slow and lacks the high-stakes conflict or shocking reveal required to stop a scroll; it is a quiet, domestic moment that fails to hook a new viewer."
+    },
+    {
+      "episode": 9,
+      "start": "E09.B012",
+      "reason": "The clip is too slow and lacks a high-stakes hook; it plays more like a scene from a medical drama than a viral microdrama promo."
+    },
+    {
+      "episode": 10,
+      "start": "E10.B049",
+      "reason": "The clip lacks a high-stakes hook and relies on slow, romantic tension that fails to grab a scrolling viewer; it is too soft for a microdrama promo."
+    },
+    {
+      "episode": 12,
+      "start": "E12.B008",
+      "reason": "The clip is too slow and lacks a high-stakes hook; it relies on dialogue-heavy exposition rather than immediate, visceral conflict."
+    },
+    {
+      "episode": 16,
+      "start": "E16.B041",
+      "reason": "The clip loses all momentum after the reveal, turning into a slow, romantic dialogue that kills the tension."
+    },
+    {
+      "episode": 16,
+      "start": "E16.B051",
+      "reason": "The clip lacks a high-stakes hook and relies on slow, romantic dialogue that fails to capture a scrolling viewer's attention."
+    },
+    {
+      "episode": 17,
+      "start": "E17.B056",
+      "reason": "The clip is entirely too slow and lacks any conflict, tension, or hook; it is a generic romantic scene that fails to grab a scrolling viewer."
+    },
+    {
+      "episode": 17,
+      "start": "E17.B044",
+      "reason": "This clip is entirely too slow and lacks the high-stakes conflict or immediate tension required for a microdrama promo; it is a 'cozy' scene that fails to hook a scrolling viewer."
+    },
+    {
+      "episode": 17,
+      "start": "E17.B032",
+      "reason": "The clip is too slow and lacks a high-stakes hook; it is a quiet, romantic moment that fails to stop a scroller looking for drama."
+    },
+    {
+      "episode": 18,
+      "start": "E18.B077",
+      "reason": "The clip lacks an immediate, high-stakes visual hook; it relies on dialogue and slow pacing rather than an active, shocking moment."
+    },
+    {
+      "episode": 18,
+      "start": "E18.B002",
+      "reason": "The clip is too slow to start and ends on a resolution rather than a cliffhanger."
+    },
+    {
+      "episode": 19,
+      "start": "E19.B027",
+      "reason": "The clip is too slow and exposition-heavy; it lacks a visceral hook to stop a scroll and ends on a static, informative note rather than a high-stakes cliffhanger."
+    },
+    {
+      "episode": 19,
+      "start": "E19.B054",
+      "reason": "The clip is too slow and sentimental; it lacks the high-stakes conflict or shocking reveal required to stop a scroll."
+    },
+    {
+      "episode": 20,
+      "start": "E20.B043",
+      "reason": "The clip lacks a high-stakes visual hook and the transition between the barn scene and the estate scene is jarring, making it feel like two separate clips rather than a cohesive promo."
+    },
+    {
+      "episode": 20,
+      "start": "E20.B023",
+      "reason": "The clip lacks a high-stakes hook and relies on slow, expositional dialogue that fails to grab a scrolling viewer."
+    },
+    {
+      "episode": 21,
+      "start": "E21.B021",
+      "reason": "The clip lacks a high-stakes hook and the resolution of the medical emergency is too slow and generic to stop a scroll."
+    },
+    {
+      "episode": 21,
+      "start": "E21.B002",
+      "reason": "The hook is too slow and generic; it lacks the high-stakes conflict or immediate shock required to stop a scroll."
+    },
+    {
+      "episode": 22,
+      "start": "E22.B042",
+      "reason": "The clip lacks a high-stakes hook and the pacing is too slow; it feels like a generic scene transition rather than a viral moment."
+    },
+    {
+      "episode": 22,
+      "start": "E22.B041",
+      "reason": "The clip is too slow and lacks a high-stakes hook; the dialogue is generic and fails to establish the danger of the infiltration."
+    },
+    {
+      "episode": 23,
+      "start": "E23.B031",
+      "reason": "The clip lacks a high-stakes visual hook; it is purely dialogue-driven and ends on a reveal rather than an active threat or cliffhanger."
+    },
+    {
+      "episode": 25,
+      "start": "E25.B078",
+      "reason": "The dialogue is too slow and lacks an immediate, high-stakes visual hook to stop a scroll; it feels like a generic romantic drama moment rather than a high-tension microdrama beat."
+    },
+    {
+      "episode": 25,
+      "start": "E25.B080",
+      "reason": "The clip lacks a high-stakes visual hook and the dialogue is too slow and exposition-heavy for a social media audience."
+    },
+    {
+      "episode": 26,
+      "start": "E26.B020",
+      "reason": "The clip lacks a high-stakes hook and ends on a resolution rather than a cliffhanger."
+    },
+    {
+      "episode": 27,
+      "start": "E27.B034",
+      "reason": "The hook is too generic and the pacing is too slow for a microdrama; it lacks the immediate high-stakes tension required to stop a scroll."
+    },
+    {
+      "episode": 27,
+      "start": "E27.B005",
+      "reason": "The clip lacks a high-stakes hook and the ending is a slow realization rather than a high-tension cliffhanger; the interruption by the villains is missing, which is the actual dramatic peak."
+    },
+    {
+      "episode": 35,
+      "start": "E35.B039",
+      "reason": "The clip is too slow, lacks a visceral hook, and feels like a generic exposition dump rather than a high-stakes microdrama moment."
+    },
+    {
+      "episode": 35,
+      "start": "E35.B048",
+      "reason": "The clip lacks a high-stakes visual hook and relies too heavily on expositional dialogue that feels slow for a vertical microdrama."
+    },
+    {
+      "episode": 38,
+      "start": "E38.B012",
+      "reason": "The clip lacks a high-stakes hook and relies on slow, emotional pacing that fails to grab a scrolling viewer's attention."
+    },
+    {
+      "episode": 38,
+      "start": "E38.B027",
+      "reason": "The clip is too slow and melodramatic; it lacks the high-stakes action or shocking reveal required to stop a scroll."
+    },
+    {
+      "episode": 39,
+      "start": "E39.B048",
+      "reason": "The clip is too slow and lacks an immediate, high-stakes conflict hook; it relies on expositional dialogue rather than a shocking visual or narrative twist."
+    },
+    {
+      "episode": 39,
+      "start": "E39.B021",
+      "reason": "The clip lacks a strong hook and fails to establish the stakes for a stranger; it is just a generic fight scene that doesn't explain why the Duke is disguised or why the rescue matters."
+    },
+    {
+      "episode": 40,
+      "start": "E40.B032",
+      "reason": "The clip is too slow and lacks a high-stakes hook; it focuses on wedding aesthetics rather than the promised conflict."
+    },
+    {
+      "episode": 40,
+      "start": "E40.B037",
+      "reason": "The clip is a slow, generic wedding sequence that lacks the promised tension or conflict; it fails to hook the viewer because it focuses on aesthetics rather than the promised 'retribution' or 'execution'."
+    },
+    {
+      "episode": 40,
+      "start": "E40.B026",
+      "reason": "The clip is too slow and lacks a high-stakes hook; it functions as a standard wedding scene rather than a gripping drama promo."
+    },
+    {
+      "episode": 41,
+      "start": "E41.B000",
+      "reason": "The hook is too slow and lacks immediate visual impact; the clip ends before the actual conflict or explosion occurs, failing to deliver the promised payoff."
+    },
+    {
+      "episode": 47,
+      "start": "E47.B021",
+      "reason": "The clip lacks a high-stakes hook and suffers from a jarring, disconnected transition between the romantic dialogue and the arrival of the antagonist."
+    },
+    {
+      "episode": 49,
+      "start": "E49.B004",
+      "reason": "The dialogue is too exposition-heavy and lacks the immediate, high-stakes tension required to stop a scroll; it feels like a slow-burn scene rather than a hook."
+    },
+    {
+      "episode": 49,
+      "start": "E49.B004",
+      "reason": "The clip is too slow, lacks immediate stakes, and fails to establish a compelling hook for a stranger."
+    },
+    {
+      "episode": 50,
+      "start": "E50.B010",
+      "reason": "The clip lacks a visual hook and fails to include the crucial 'Agnes witnessing the act' element mentioned in the logline, making it a slow, dialogue-heavy scene that won't stop a scroller."
+    },
+    {
+      "episode": 50,
+      "start": "E50.B018",
+      "reason": "The clip lacks a high-stakes hook and fails to include the crucial reveal of Agnes witnessing the affair, which is the only element that would actually stop a scroller."
+    }
+  ]
+}

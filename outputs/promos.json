@@ -1,0 +1,657 @@
+{
+  "meta": {
+    "show": "I Married a Broken Soldier. He was a Duke",
+    "input_dir": "..\\I Married a Broken Soldier. He was a Duke-scripts (2)\\I Married a Broken Soldier. He was a Duke",
+    "n_episodes": 50,
+    "n_beats": 3727,
+    "n_candidates": 200,
+    "n_judged": 200,
+    "n_kept": 152,
+    "model": "gemini:gemini-3.1-flash-lite",
+    "elapsed_s": 980.05
+  },
+  "promos": [
+    {
+      "rank": 1,
+      "kind": "single",
+      "segments": [
+        {
+          "episode": 3,
+          "start_s": 77.2,
+          "end_s": 136.2,
+          "start_beat": "E03.B064",
+          "end_beat": "E03.B112"
+        }
+      ],
+      "hook": "A mysterious, scarred stranger steps into a chapel and effortlessly takes down a royal guard with a single strike.",
+      "cliffhanger": "The stranger drops to one knee to propose to a woman he just met, leaving the entire congregation in stunned silence.",
+      "why_it_works": "It hits the 'protector' trope perfectly, moving from high-stakes physical conflict to a romantic, high-society scandal in under a minute.",
+      "hook_strength": 5,
+      "cliffhanger_strength": 5,
+      "standalone": 5,
+      "spoiler_risk": 1,
+      "base_score": 4.4,
+      "slate_score": 4.4,
+      "judged_by": "gemini:gemini-3.1-flash-lite",
+      "flags": [],
+      "duration": 59.0,
+      "episodes": [
+        3
+      ],
+      "timecodes": [
+        "Ep 03 01:17.20-02:16.20"
+      ]
+    },
+    {
+      "rank": 2,
+      "kind": "stitch",
+      "segments": [
+        {
+          "episode": 3,
+          "start_s": 60.5,
+          "end_s": 85.5,
+          "start_beat": "E03.B048",
+          "end_beat": "E03.B069"
+        },
+        {
+          "episode": 7,
+          "start_s": 50.8,
+          "end_s": 75.5,
+          "start_beat": "E07.B024",
+          "end_beat": "E07.B036"
+        }
+      ],
+      "hook": "A woman is being forcefully dragged away by guards in a cathedral while screaming for help.",
+      "cliffhanger": "The antagonist threatens the protagonist's husband just as the mysterious, scarred man emerges from the forest mist.",
+      "why_it_works": "Opens on the strongest hook in the show and cuts to the hardest unresolved beat: The antagonist threatens the protagonist's husband just as the mysterious, scarred man emerges from the forest mist.",
+      "hook_strength": 5,
+      "cliffhanger_strength": 5,
+      "standalone": 5,
+      "spoiler_risk": 2,
+      "base_score": 4.3,
+      "slate_score": 4.3,
+      "judged_by": "gemini:gemini-3.1-flash-lite",
+      "flags": [
+        "stitch_unverified_continuity"
+      ],
+      "duration": 49.7,
+      "episodes": [
+        3,
+        7
+      ],
+      "timecodes": [
+        "Ep 03 01:00.50-01:25.50",
+        "Ep 07 00:50.80-01:15.50"
+      ]
+    },
+    {
+      "rank": 3,
+      "kind": "single",
+      "segments": [
+        {
+          "episode": 10,
+          "start_s": 2.6,
+          "end_s": 31.8,
+          "start_beat": "E10.B004",
+          "end_beat": "E10.B024"
+        }
+      ],
+      "hook": "A wounded, blood-soaked man stumbles into a quiet cottage, immediately establishing high stakes.",
+      "cliffhanger": "The clip cuts just as the man begins to remove his coat, leaving the severity of his injuries and the tension between the couple unresolved.",
+      "why_it_works": "The immediate visual of a wounded protagonist combined with the power dynamic shift between the characters creates instant intrigue for a casual viewer.",
+      "hook_strength": 5,
+      "cliffhanger_strength": 4,
+      "standalone": 5,
+      "spoiler_risk": 1,
+      "base_score": 4.1,
+      "slate_score": 4.1,
+      "judged_by": "gemini:gemini-3.1-flash-lite",
+      "flags": [],
+      "duration": 29.2,
+      "episodes": [
+        10
+      ],
+      "timecodes": [
+        "Ep 10 00:02.60-00:31.80"
+      ]
+    },
+    {
+      "rank": 4,
+      "kind": "single",
+      "segments": [
+        {
+          "episode": 15,
+          "start_s": 44.8,
+          "end_s": 67.5,
+          "start_beat": "E15.B030",
+          "end_beat": "E15.B044"
+        }
+      ],
+      "hook": "A thug aggressively shoves a woman to the ground, causing her to crash onto a stone path.",
+      "cliffhanger": "The scene cuts just as the hero, Alexander, charges into the scene to confront the thugs.",
+      "why_it_works": "It combines high-stakes physical conflict with a clear 'damsel in distress' trope that triggers an immediate desire for retribution.",
+      "hook_strength": 5,
+      "cliffhanger_strength": 4,
+      "standalone": 5,
+      "spoiler_risk": 1,
+      "base_score": 4.1,
+      "slate_score": 4.1,
+      "judged_by": "gemini:gemini-3.1-flash-lite",
+      "flags": [],
+      "duration": 22.7,
+      "episodes": [
+        15
+      ],
+      "timecodes": [
+        "Ep 15 00:44.80-01:07.50"
+      ]
+    },
+    {
+      "rank": 5,
+      "kind": "single",
+      "segments": [
+        {
+          "episode": 45,
+          "start_s": 86.5,
+          "end_s": 121.75,
+          "start_beat": "E45.B056",
+          "end_beat": "E45.B072"
+        }
+      ],
+      "hook": "The cathedral doors slam open violently, interrupting a wedding with a booming declaration of invalidity.",
+      "cliffhanger": "The protagonist is publicly shamed as a fraud, and the antagonist reveals a triumphant, venomous smile.",
+      "why_it_works": "It delivers high-stakes public humiliation and a clear 'us against the world' conflict that hooks viewers immediately.",
+      "hook_strength": 5,
+      "cliffhanger_strength": 5,
+      "standalone": 4,
+      "spoiler_risk": 2,
+      "base_score": 4.05,
+      "slate_score": 4.05,
+      "judged_by": "gemini:gemini-3.1-flash-lite",
+      "flags": [],
+      "duration": 35.25,
+      "episodes": [
+        45
+      ],
+      "timecodes": [
+        "Ep 45 01:26.50-02:01.75"
+      ]
+    },
+    {
+      "rank": 6,
+      "kind": "stitch",
+      "segments": [
+        {
+          "episode": 5,
+          "start_s": 54.5,
+          "end_s": 74.5,
+          "start_beat": "E05.B031",
+          "end_beat": "E05.B041"
+        },
+        {
+          "episode": 9,
+          "start_s": 77.5,
+          "end_s": 101.2,
+          "start_beat": "E09.B059",
+          "end_beat": "E09.B078"
+        }
+      ],
+      "hook": "A woman's precious family heirloom is violently snatched and thrown into a muddy puddle in front of a crowd.",
+      "cliffhanger": "A servant reveals that a war veteran in the village bears the exact same scar as the late Duke, threatening the protagonist's secret identity.",
+      "why_it_works": "Opens on the strongest hook in the show and cuts to the hardest unresolved beat: A servant reveals that a war veteran in the village bears the exact same scar as the late Duke, threatening the protagonist's secret identity.",
+      "hook_strength": 5,
+      "cliffhanger_strength": 5,
+      "standalone": 4,
+      "spoiler_risk": 2,
+      "base_score": 4.05,
+      "slate_score": 4.05,
+      "judged_by": "gemini:gemini-3.1-flash-lite",
+      "flags": [
+        "stitch_unverified_continuity"
+      ],
+      "duration": 43.7,
+      "episodes": [
+        5,
+        9
+      ],
+      "timecodes": [
+        "Ep 05 00:54.50-01:14.50",
+        "Ep 09 01:17.50-01:41.20"
+      ]
+    },
+    {
+      "rank": 7,
+      "kind": "single",
+      "segments": [
+        {
+          "episode": 24,
+          "start_s": 29.0,
+          "end_s": 57.6,
+          "start_beat": "E24.B020",
+          "end_beat": "E24.B043"
+        }
+      ],
+      "hook": "A cruel noblewoman dismisses a dying woman's suffering and violently strikes the protagonist with a riding crop.",
+      "cliffhanger": "Juliana is forced to scrub a massive, soot-covered hearth, leaving her secret mission to save the Duchess in jeopardy.",
+      "why_it_works": "The immediate physical violence and the classic 'arrogant villain vs. underdog' dynamic create instant emotional stakes that hook viewers.",
+      "hook_strength": 5,
+      "cliffhanger_strength": 4,
+      "standalone": 5,
+      "spoiler_risk": 2,
+      "base_score": 4.0,
+      "slate_score": 4.0,
+      "judged_by": "gemini:gemini-3.1-flash-lite",
+      "flags": [],
+      "duration": 28.6,
+      "episodes": [
+        24
+      ],
+      "timecodes": [
+        "Ep 24 00:29.00-00:57.60"
+      ]
+    },
+    {
+      "rank": 8,
+      "kind": "single",
+      "segments": [
+        {
+          "episode": 32,
+          "start_s": 116.9,
+          "end_s": 142.3,
+          "start_beat": "E32.B088",
+          "end_beat": "E32.B106"
+        }
+      ],
+      "hook": "Juliana tells her captor that despite all her power, she has never learned how to make anyone love her.",
+      "cliffhanger": "The clip cuts just as the captor is about to strike with a red-hot branding iron while Juliana continues to mock her.",
+      "why_it_works": "The high-stakes power dynamic between a chained, defiant victim and a hysterical, weapon-wielding villain creates immediate, visceral tension.",
+      "hook_strength": 5,
+      "cliffhanger_strength": 4,
+      "standalone": 5,
+      "spoiler_risk": 2,
+      "base_score": 4.0,
+      "slate_score": 4.0,
+      "judged_by": "gemini:gemini-3.1-flash-lite",
+      "flags": [],
+      "duration": 25.4,
+      "episodes": [
+        32
+      ],
+      "timecodes": [
+        "Ep 32 01:56.90-02:22.30"
+      ]
+    },
+    {
+      "rank": 9,
+      "kind": "single",
+      "segments": [
+        {
+          "episode": 16,
+          "start_s": 19.2,
+          "end_s": 44.0,
+          "start_beat": "E16.B016",
+          "end_beat": "E16.B035"
+        }
+      ],
+      "hook": "A man effortlessly dismantles three armed thugs in a brutal display of combat skill.",
+      "cliffhanger": "Alexander corners the final thug and demands to know who sent him, leaving the mastermind's identity hanging in the balance.",
+      "why_it_works": "The 'hidden badass' trope is highly effective for vertical drama, and the transition from high-octane violence to the mystery of the mastermind creates a perfect loop for engagement.",
+      "hook_strength": 4,
+      "cliffhanger_strength": 5,
+      "standalone": 5,
+      "spoiler_risk": 2,
+      "base_score": 3.95,
+      "slate_score": 3.95,
+      "judged_by": "gemini:gemini-3.1-flash-lite",
+      "flags": [],
+      "duration": 24.8,
+      "episodes": [
+        16
+      ],
+      "timecodes": [
+        "Ep 16 00:19.20-00:44.00"
+      ]
+    },
+    {
+      "rank": 10,
+      "kind": "single",
+      "segments": [
+        {
+          "episode": 34,
+          "start_s": 102.3,
+          "end_s": 161.8,
+          "start_beat": "E34.B063",
+          "end_beat": "E34.B099"
+        }
+      ],
+      "hook": "An angry woman in a courtroom accuses the protagonist of poisoning her daughter with herbal medicine.",
+      "cliffhanger": "The judge threatens that the protagonist's refusal to repent will be treated as proof of witchcraft, leaving her fate hanging in the balance.",
+      "why_it_works": "The high-stakes 'trial by fire' scenario combined with the protagonist's defiant refusal to back down creates immediate tension that keeps the viewer watching to see if she survives.",
+      "hook_strength": 4,
+      "cliffhanger_strength": 5,
+      "standalone": 5,
+      "spoiler_risk": 2,
+      "base_score": 3.95,
+      "slate_score": 3.95,
+      "judged_by": "gemini:gemini-3.1-flash-lite",
+      "flags": [],
+      "duration": 59.5,
+      "episodes": [
+        34
+      ],
+      "timecodes": [
+        "Ep 34 01:42.30-02:41.80"
+      ]
+    },
+    {
+      "rank": 11,
+      "kind": "single",
+      "segments": [
+        {
+          "episode": 36,
+          "start_s": 160.5,
+          "end_s": 200.75,
+          "start_beat": "E36.B099",
+          "end_beat": "E36.B120"
+        }
+      ],
+      "hook": "Alexander delivers a chilling, throat-tightening line about his wife being marked for death.",
+      "cliffhanger": "The clip ends on the ominous promise that a 'dead Duke' is returning to exact his revenge.",
+      "why_it_works": "The high-stakes emotional intensity and the 'revenant' trope create an immediate, compelling narrative hook that requires no prior knowledge of the series to understand the conflict.",
+      "hook_strength": 4,
+      "cliffhanger_strength": 5,
+      "standalone": 5,
+      "spoiler_risk": 2,
+      "base_score": 3.95,
+      "slate_score": 3.95,
+      "judged_by": "gemini:gemini-3.1-flash-lite",
+      "flags": [],
+      "duration": 40.25,
+      "episodes": [
+        36
+      ],
+      "timecodes": [
+        "Ep 36 02:40.50-03:20.75"
+      ]
+    },
+    {
+      "rank": 12,
+      "kind": "single",
+      "segments": [
+        {
+          "episode": 1,
+          "start_s": 80.1,
+          "end_s": 137.5,
+          "start_beat": "E01.B054",
+          "end_beat": "E01.B093"
+        }
+      ],
+      "hook": "A humiliated bride begs her own father to stop her fianc\u00e9 from abandoning her at the altar.",
+      "cliffhanger": "The bride stops crying and her expression shifts from devastation to cold, dangerous defiance as the music swells.",
+      "why_it_works": "It taps into the universal 'public humiliation' trope, making the viewer crave the inevitable revenge arc.",
+      "hook_strength": 4,
+      "cliffhanger_strength": 4,
+      "standalone": 5,
+      "spoiler_risk": 1,
+      "base_score": 3.75,
+      "slate_score": 3.75,
+      "judged_by": "gemini:gemini-3.1-flash-lite",
+      "flags": [],
+      "duration": 57.4,
+      "episodes": [
+        1
+      ],
+      "timecodes": [
+        "Ep 01 01:20.10-02:17.50"
+      ]
+    },
+    {
+      "rank": 13,
+      "kind": "single",
+      "segments": [
+        {
+          "episode": 2,
+          "start_s": 4.7,
+          "end_s": 27.4,
+          "start_beat": "E02.B005",
+          "end_beat": "E02.B018"
+        }
+      ],
+      "hook": "The groom publicly insults his bride at the altar, calling her 'too plain' and 'beneath' him.",
+      "cliffhanger": "The clip cuts on the bride's shattered realization that her sister has replaced her as the 'better choice'.",
+      "why_it_works": "The extreme public humiliation and the betrayal by both the groom and the sister create immediate emotional stakes that demand a revenge payoff.",
+      "hook_strength": 4,
+      "cliffhanger_strength": 4,
+      "standalone": 5,
+      "spoiler_risk": 1,
+      "base_score": 3.75,
+      "slate_score": 3.75,
+      "judged_by": "gemini:gemini-3.1-flash-lite",
+      "flags": [],
+      "duration": 22.7,
+      "episodes": [
+        2
+      ],
+      "timecodes": [
+        "Ep 02 00:04.70-00:27.40"
+      ]
+    },
+    {
+      "rank": 14,
+      "kind": "single",
+      "segments": [
+        {
+          "episode": 7,
+          "start_s": 65.6,
+          "end_s": 90.0,
+          "start_beat": "E07.B031",
+          "end_beat": "E07.B044"
+        }
+      ],
+      "hook": "A wealthy antagonist threatens to make a woman disappear, mocking her for being married to a beggar.",
+      "cliffhanger": "The arrogant antagonist is confronted by the towering, silent husband and is left trembling in terror, unable to maintain his bravado.",
+      "why_it_works": "The classic 'arrogant bully meets his match' trope is highly effective for microdramas, and the visual contrast between the antagonist's fear and the husband's silent, imposing presence creates immediate tension.",
+      "hook_strength": 4,
+      "cliffhanger_strength": 4,
+      "standalone": 5,
+      "spoiler_risk": 1,
+      "base_score": 3.75,
+      "slate_score": 3.75,
+      "judged_by": "gemini:gemini-3.1-flash-lite",
+      "flags": [],
+      "duration": 24.4,
+      "episodes": [
+        7
+      ],
+      "timecodes": [
+        "Ep 07 01:05.60-01:30.00"
+      ]
+    },
+    {
+      "rank": 15,
+      "kind": "single",
+      "segments": [
+        {
+          "episode": 13,
+          "start_s": 47.0,
+          "end_s": 107.0,
+          "start_beat": "E13.B027",
+          "end_beat": "E13.B067"
+        }
+      ],
+      "hook": "A man in chains screams in agony as his wife crawls into a bed of razor-sharp thorns.",
+      "cliffhanger": "The clip cuts exactly as her blood-stained fingers make contact with the hidden emerald ring she is sacrificing her body to find.",
+      "why_it_works": "The visceral, high-stakes physical suffering combined with the 'impossible task' trope creates immediate empathy and tension for a new viewer.",
+      "hook_strength": 5,
+      "cliffhanger_strength": 4,
+      "standalone": 4,
+      "spoiler_risk": 2,
+      "base_score": 3.75,
+      "slate_score": 3.75,
+      "judged_by": "gemini:gemini-3.1-flash-lite",
+      "flags": [],
+      "duration": 60.0,
+      "episodes": [
+        13
+      ],
+      "timecodes": [
+        "Ep 13 00:47.00-01:47.00"
+      ]
+    },
+    {
+      "rank": 16,
+      "kind": "single",
+      "segments": [
+        {
+          "episode": 18,
+          "start_s": 111.5,
+          "end_s": 171.0,
+          "start_beat": "E18.B059",
+          "end_beat": "E18.B075"
+        }
+      ],
+      "hook": "A man smashes through a burning window while carrying a woman to safety as their home explodes behind them.",
+      "cliffhanger": "The clip ends on the husband's face shifting into a mask of lethal, cold-blooded vengeance, signaling an imminent violent retaliation.",
+      "why_it_works": "The high-stakes action opening immediately grabs attention, followed by a clear emotional stakes shift that promises a revenge arc.",
+      "hook_strength": 5,
+      "cliffhanger_strength": 4,
+      "standalone": 4,
+      "spoiler_risk": 2,
+      "base_score": 3.75,
+      "slate_score": 3.75,
+      "judged_by": "gemini:gemini-3.1-flash-lite",
+      "flags": [],
+      "duration": 59.5,
+      "episodes": [
+        18
+      ],
+      "timecodes": [
+        "Ep 18 01:51.50-02:51.00"
+      ]
+    },
+    {
+      "rank": 17,
+      "kind": "single",
+      "segments": [
+        {
+          "episode": 23,
+          "start_s": 36.0,
+          "end_s": 88.0,
+          "start_beat": "E23.B016",
+          "end_beat": "E23.B044"
+        }
+      ],
+      "hook": "The Dowager Duchess is shown gasping for air in a deathly struggle, immediately establishing a high-stakes medical emergency.",
+      "cliffhanger": "The clip ends on the chilling reveal that the Duchess is being poisoned with arsenic, leaving the viewer wondering who the culprit is.",
+      "why_it_works": "The transition from a 'natural' death to a murder mystery creates an immediate investigative hook that keeps the viewer engaged.",
+      "hook_strength": 4,
+      "cliffhanger_strength": 4,
+      "standalone": 5,
+      "spoiler_risk": 1,
+      "base_score": 3.75,
+      "slate_score": 3.75,
+      "judged_by": "gemini:gemini-3.1-flash-lite",
+      "flags": [],
+      "duration": 52.0,
+      "episodes": [
+        23
+      ],
+      "timecodes": [
+        "Ep 23 00:36.00-01:28.00"
+      ]
+    },
+    {
+      "rank": 18,
+      "kind": "single",
+      "segments": [
+        {
+          "episode": 25,
+          "start_s": 13.2,
+          "end_s": 62.5,
+          "start_beat": "E25.B008",
+          "end_beat": "E25.B038"
+        }
+      ],
+      "hook": "A man grabs a woman's shoulder, causing her to wince in pain, and he immediately discovers a fresh, bloody whip wound.",
+      "cliffhanger": "The clip cuts right as the protagonist realizes the Dowager Duchess is in danger, leaving the viewer wondering about the poisoning plot.",
+      "why_it_works": "It combines physical abuse, a protective male lead, and a high-stakes mystery regarding a poisoning, which are core tropes that drive engagement in this genre.",
+      "hook_strength": 5,
+      "cliffhanger_strength": 4,
+      "standalone": 4,
+      "spoiler_risk": 2,
+      "base_score": 3.75,
+      "slate_score": 3.75,
+      "judged_by": "gemini:gemini-3.1-flash-lite",
+      "flags": [],
+      "duration": 49.3,
+      "episodes": [
+        25
+      ],
+      "timecodes": [
+        "Ep 25 00:13.20-01:02.50"
+      ]
+    },
+    {
+      "rank": 19,
+      "kind": "single",
+      "segments": [
+        {
+          "episode": 28,
+          "start_s": 40.3,
+          "end_s": 61.3,
+          "start_beat": "E28.B031",
+          "end_beat": "E28.B042"
+        }
+      ],
+      "hook": "A dying Dowager Duchess points an accusing finger at the villains, screaming that she has been poisoned.",
+      "cliffhanger": "The villain leans menacingly over the gasping, helpless Duchess while the protagonist is dragged away by guards.",
+      "why_it_works": "The high-stakes confrontation and the immediate gaslighting of a dying woman create instant tension that demands a resolution.",
+      "hook_strength": 5,
+      "cliffhanger_strength": 4,
+      "standalone": 4,
+      "spoiler_risk": 2,
+      "base_score": 3.75,
+      "slate_score": 3.75,
+      "judged_by": "gemini:gemini-3.1-flash-lite",
+      "flags": [],
+      "duration": 21.0,
+      "episodes": [
+        28
+      ],
+      "timecodes": [
+        "Ep 28 00:40.30-01:01.30"
+      ]
+    },
+    {
+      "rank": 20,
+      "kind": "single",
+      "segments": [
+        {
+          "episode": 30,
+          "start_s": 94.6,
+          "end_s": 151.21,
+          "start_beat": "E30.B048",
+          "end_beat": "E30.B068"
+        }
+      ],
+      "hook": "The Elder Nobleman commands the conspirators to manufacture evidence and frame a woman for witchcraft to ensure her execution.",
+      "cliffhanger": "The scene cuts to the dark, flooded dungeon where the victim is held, leaving her fate sealed as the execution is set for tomorrow.",
+      "why_it_works": "The cold, calculated planning of a judicial murder creates immediate tension and moral outrage that hooks the viewer.",
+      "hook_strength": 5,
+      "cliffhanger_strength": 4,
+      "standalone": 4,
+      "spoiler_risk": 2,
+      "base_score": 3.75,
+      "slate_score": 3.75,
+      "judged_by": "gemini:gemini-3.1-flash-lite",
+      "flags": [],
+      "duration": 56.61,
+      "episodes": [
+        30
+      ],
+      "timecodes": [
+        "Ep 30 01:34.60-02:31.21"
+      ]
+    }
+  ]
+}

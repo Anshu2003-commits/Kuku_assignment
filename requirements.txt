@@ -1,0 +1,6 @@
+google-genai>=1.0.0
+streamlit>=1.36
+
+# Optional - only needed if you swap provider:
+# openai>=1.40      # --provider openai | groq
+# anthropic>=0.40   # --provider anthropic
