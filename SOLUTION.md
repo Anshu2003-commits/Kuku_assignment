@@ -1,6 +1,6 @@
 # Problem 1 — Find the Promos
 
-**Prototype:** `<repo link>` · **Raw outputs:** `outputs/` in the repo ·
+**Prototype:** https://github.com/Anshu2003-commits/Kuku_assignment · **Raw outputs:** `outputs/` in that repo ·
 **Run:** `python run.py --input "<pack>" --out outputs/`
 
 ## Why this problem
