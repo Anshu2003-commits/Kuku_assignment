@@ -17,7 +17,8 @@ I Married a Broken Soldier*/
 scripts/
 
 # Build artefacts.
-# SOLUTION.html is the print view, used only to export the PDF.
+# SOLUTION.html is the print view used to export SOLUTION.pdf.
+# The PDF itself IS a deliverable, so it is committed.
 SOLUTION.html
 streamlit.log
 run.log
