@@ -1,0 +1,801 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kuku Promo Finder — Anshu Kumar Sharma (22322008)</title>
+<meta name="description" content="Kuku AI Generalist Assignment, Problem 1: a tool that reads 50 microdrama screenplays and returns a ranked shortlist of 20-60s promo clips with exact timecodes.">
+<meta name="author" content="Anshu Kumar Sharma">
+<meta property="og:title" content="Kuku Promo Finder — Find the Promos">
+<meta property="og:description" content="Kuku AI Generalist Assignment, Problem 1. 3,727 beats parsed, 200 candidates judged, 20 ranked promos.">
+<meta property="og:type" content="article">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+  /* ---- tokens: light is the base, dark overrides ---------------------- */
+  :root {
+    --ink:       #1B1410;
+    --ink-soft:  #5C4F47;
+    --ink-faint: #8A7F77;
+    --ground:    #FFFBF7;
+    --surface:   #FFF4EC;
+    --surface-2: #FFEADD;
+    --line:      #EBDCD0;
+    --line-firm: #D8C4B4;
+
+    --orange:    #E2500A;
+    --orange-lit:#FF641C;
+    --amber:     #B6790A;
+    --amber-lit: #FFBB10;
+    --ember:     #C35F12;
+
+    --good:      #1C7A3E;
+    --warn:      #A8600B;
+    --bad:       #B3301C;
+
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+    --sans: "IBM Plex Sans", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+    --disp: "Bricolage Grotesque", "IBM Plex Sans", ui-sans-serif, sans-serif;
+
+    --maxw: 50rem;
+    --r: 10px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink:       #F6EFE9;
+      --ink-soft:  #BCADA2;
+      --ink-faint: #8A7B70;
+      --ground:    #17110D;
+      --surface:   #211810;
+      --surface-2: #2C2017;
+      --line:      #342619;
+      --line-firm: #4A3626;
+
+      --orange:    #FF7A3C;
+      --orange-lit:#FF641C;
+      --amber:     #FFBB10;
+      --amber-lit: #FFD166;
+      --ember:     #E07A2C;
+
+      --good:      #58C98A;
+      --warn:      #EFB54A;
+      --bad:       #FF8B72;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ink:       #F6EFE9;
+    --ink-soft:  #BCADA2;
+    --ink-faint: #8A7B70;
+    --ground:    #17110D;
+    --surface:   #211810;
+    --surface-2: #2C2017;
+    --line:      #342619;
+    --line-firm: #4A3626;
+
+    --orange:    #FF7A3C;
+    --orange-lit:#FF641C;
+    --amber:     #FFBB10;
+    --amber-lit: #FFD166;
+    --ember:     #E07A2C;
+
+    --good:      #58C98A;
+    --warn:      #EFB54A;
+    --bad:       #FF8B72;
+  }
+
+  /* ---- base ------------------------------------------------------------ */
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 1.4rem 5rem;
+  }
+
+  p { margin: 0 0 1em; }
+  a { color: var(--orange); text-underline-offset: 3px; }
+  a:focus-visible,
+  button:focus-visible { outline: 2px solid var(--orange-lit); outline-offset: 3px; }
+
+  strong { font-weight: 600; color: var(--ink); }
+  em { font-style: italic; color: var(--ink); }
+
+  code, .mono { font-family: var(--mono); font-variant-ligatures: none; }
+  code {
+    font-size: .86em;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    padding: .08em .36em;
+    border-radius: 5px;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  h2 {
+    font-family: var(--disp);
+    font-size: clamp(1.45rem, 3.4vw, 1.95rem);
+    font-weight: 700;
+    letter-spacing: -.022em;
+    line-height: 1.12;
+    text-wrap: balance;
+    margin: 0 0 .15em;
+  }
+  h3 {
+    font-family: var(--disp);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -.012em;
+    margin: 0 0 .4em;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin: 0 0 .7rem;
+  }
+
+  section { padding: 3.2rem 0 0; }
+  section > p:last-child { margin-bottom: 0; }
+
+  .rule { height: 1px; background: var(--line); border: 0; margin: 3.2rem 0 0; }
+
+  /* ---- hero ------------------------------------------------------------ */
+  .hero {
+    padding: 3.6rem 0 0;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2.6rem;
+  }
+  .tag {
+    display: inline-flex; align-items: center; gap: .55rem;
+    font-family: var(--mono); font-size: .72rem; font-weight: 600;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ground);
+    background: linear-gradient(100deg, var(--orange-lit), var(--amber));
+    padding: .36rem .7rem; border-radius: 100px;
+  }
+  :root[data-theme="dark"] .tag,
+  :root:not([data-theme="light"]) .tag { color: #17110D; }
+
+  h1 {
+    font-family: var(--disp);
+    font-size: clamp(2.4rem, 7.4vw, 4.1rem);
+    font-weight: 800;
+    letter-spacing: -.038em;
+    line-height: .98;
+    text-wrap: balance;
+    margin: 1.1rem 0 .5rem;
+  }
+  .lede {
+    font-size: clamp(1.02rem, 2.3vw, 1.18rem);
+    color: var(--ink-soft);
+    max-width: 38rem;
+    margin: 0 0 1.6rem;
+  }
+
+  .byline {
+    display: flex; flex-wrap: wrap; align-items: baseline;
+    gap: .35rem 1.3rem;
+    padding-top: 1.4rem;
+    border-top: 1px dashed var(--line-firm);
+  }
+  .byline .name {
+    font-family: var(--disp);
+    font-size: clamp(1.4rem, 4.2vw, 2rem);
+    font-weight: 800;
+    letter-spacing: -.028em;
+    line-height: 1.08;
+    color: var(--ink);
+  }
+  .byline .enrol {
+    display: inline-flex; align-items: baseline; gap: .45rem;
+    font-family: var(--mono);
+    font-size: clamp(1.1rem, 3.2vw, 1.45rem);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.01em;
+    color: var(--orange);
+  }
+  .byline .enrol .lbl {
+    font-size: .6em; font-weight: 600; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--ink-faint);
+  }
+  .byline .meta {
+    font-family: var(--mono); font-size: .76rem; font-weight: 500;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* ---- funnel ---------------------------------------------------------- */
+  .funnel {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: .5rem;
+    margin: 2rem 0 0;
+  }
+  .fstep {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-top: 2px solid var(--step, var(--line-firm));
+    border-radius: var(--r);
+    padding: .85rem .7rem .8rem;
+  }
+  .fstep .n {
+    font-family: var(--mono);
+    font-size: clamp(1.1rem, 3.6vw, 1.5rem);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.02em;
+    color: var(--ink);
+    display: block;
+    line-height: 1.1;
+  }
+  .fstep .l {
+    font-size: .74rem;
+    color: var(--ink-faint);
+    display: block;
+    margin-top: .2rem;
+  }
+  .fstep .by {
+    font-family: var(--mono);
+    font-size: .64rem;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--step, var(--ink-faint));
+    display: block;
+    margin-top: .45rem;
+    font-weight: 600;
+  }
+  @media (max-width: 560px) {
+    .funnel { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ---- the rule callout ------------------------------------------------ */
+  .thesis {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--orange-lit);
+    border-radius: var(--r);
+    padding: 1.3rem 1.4rem;
+    margin: 0 0 1.4rem;
+  }
+  .thesis p:last-child { margin-bottom: 0; }
+  .thesis .big {
+    font-family: var(--disp);
+    font-size: 1.22rem;
+    font-weight: 700;
+    letter-spacing: -.016em;
+    line-height: 1.3;
+    margin: 0 0 .6rem;
+    text-wrap: balance;
+  }
+
+  /* beat → id → time chain */
+  .chain {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: stretch;
+    gap: .6rem;
+    margin: 1.1rem 0 .2rem;
+    font-family: var(--mono);
+    font-size: .76rem;
+  }
+  .chain .cell {
+    background: var(--ground);
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: .6rem .7rem;
+  }
+  .chain .cap {
+    display: block; font-size: .62rem; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--ink-faint); margin-bottom: .3rem;
+  }
+  .chain .arrow {
+    display: flex; align-items: center; color: var(--orange);
+    font-size: 1rem; font-weight: 600;
+  }
+  .chain .idpill { color: var(--orange); font-weight: 600; }
+  .chain .time { color: var(--amber); font-weight: 600; }
+  @media (max-width: 560px) {
+    .chain { grid-template-columns: 1fr; }
+    .chain .arrow { transform: rotate(90deg); justify-content: center; }
+  }
+
+  /* ---- pipeline -------------------------------------------------------- */
+  .pipe {
+    display: flex; flex-wrap: wrap; gap: .4rem;
+    margin: 0 0 1.4rem;
+    font-family: var(--mono); font-size: .78rem;
+  }
+  .pipe .st {
+    display: flex; flex-direction: column; gap: .15rem;
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 7px; padding: .5rem .7rem; flex: 1 1 auto;
+  }
+  .pipe .st b { font-weight: 600; color: var(--ink); font-size: .82rem; }
+  .pipe .st span {
+    font-size: .62rem; letter-spacing: .1em; text-transform: uppercase;
+    font-weight: 600;
+  }
+  .pipe .st.code span { color: var(--ink-faint); }
+  .pipe .st.ai {
+    border-color: var(--orange-lit);
+    background: color-mix(in srgb, var(--orange-lit) 10%, var(--surface));
+  }
+  .pipe .st.ai span { color: var(--orange); }
+
+  /* ---- tables ---------------------------------------------------------- */
+  .tbox { overflow-x: auto; margin: 0 0 1.4rem; }
+  table {
+    width: 100%; border-collapse: collapse;
+    font-size: .89rem; min-width: 28rem;
+  }
+  caption {
+    text-align: left; font-family: var(--mono); font-size: .68rem;
+    letter-spacing: .11em; text-transform: uppercase; color: var(--ink-faint);
+    padding-bottom: .5rem;
+  }
+  th, td {
+    text-align: left; padding: .52rem .7rem;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  thead th {
+    font-family: var(--mono); font-size: .68rem; font-weight: 600;
+    letter-spacing: .09em; text-transform: uppercase;
+    color: var(--ink-faint);
+    border-bottom: 1px solid var(--line-firm);
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.num, th.num {
+    text-align: right; font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+  }
+  .verdict { font-weight: 600; white-space: nowrap; }
+  .verdict.g { color: var(--good); }
+  .verdict.w { color: var(--warn); }
+
+  /* split table: code vs AI */
+  .split thead th:first-child { color: var(--ink-faint); }
+  .split thead th:last-child { color: var(--orange); }
+  .split td:last-child { color: var(--ink-soft); }
+
+  /* ---- lists ----------------------------------------------------------- */
+  ol.clean, ul.clean { margin: 0 0 1.4rem; padding: 0; list-style: none; }
+  ol.clean li, ul.clean li {
+    display: grid; grid-template-columns: 1.6rem 1fr; gap: .1rem .6rem;
+    padding: .42rem 0; border-bottom: 1px solid var(--line);
+  }
+  ol.clean li:last-child, ul.clean li:last-child { border-bottom: 0; }
+  ol.clean { counter-reset: n; }
+  ol.clean li::before {
+    counter-increment: n; content: counter(n, decimal-leading-zero);
+    font-family: var(--mono); font-size: .72rem; font-weight: 600;
+    color: var(--orange); padding-top: .22em;
+  }
+  ul.clean li::before {
+    content: "—"; font-family: var(--mono); color: var(--amber);
+    font-weight: 600; padding-top: .02em;
+  }
+
+  /* failure cards */
+  .fails { display: grid; gap: .55rem; margin: 0 0 1.4rem; }
+  .fail {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--r); padding: .85rem 1rem;
+  }
+  .fail h4 {
+    margin: 0 0 .22em; font-size: .95rem; font-weight: 600;
+    font-family: var(--sans);
+  }
+  .fail p { margin: 0; font-size: .89rem; color: var(--ink-soft); }
+  .fail .sev {
+    font-family: var(--mono); font-size: .62rem; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--bad); display: block; margin-bottom: .3rem;
+  }
+  .fail.ceiling .sev { color: var(--ink-faint); }
+
+  /* ---- stats strip ------------------------------------------------------ */
+  .stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(8.2rem, 1fr));
+    gap: .5rem; margin: 0 0 1.5rem;
+  }
+  .stat {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--r); padding: .8rem .85rem;
+  }
+  .stat .v {
+    font-family: var(--mono); font-size: 1.28rem; font-weight: 600;
+    font-variant-numeric: tabular-nums; letter-spacing: -.02em;
+    display: block; line-height: 1.15;
+  }
+  .stat .k {
+    font-size: .73rem; color: var(--ink-faint); display: block; margin-top: .15rem;
+  }
+  .stat.ok .v { color: var(--good); }
+
+  /* ---- footer ----------------------------------------------------------- */
+  footer {
+    margin-top: 3.4rem; padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    font-size: .85rem; color: var(--ink-faint);
+    display: flex; flex-wrap: wrap; gap: .5rem 1.4rem;
+    align-items: baseline; justify-content: space-between;
+  }
+  footer .mono { font-size: .78rem; }
+  footer .fname {
+    font-family: var(--disp); font-size: 1.05rem; font-weight: 700;
+    letter-spacing: -.018em; color: var(--ink);
+  }
+  footer .fenrol {
+    font-family: var(--mono); font-size: 1rem; font-weight: 600;
+    font-variant-numeric: tabular-nums; color: var(--orange);
+  }
+
+  .repo {
+    display: inline-flex; align-items: center; gap: .5rem;
+    font-family: var(--mono); font-size: .82rem; font-weight: 500;
+    background: var(--surface); border: 1px solid var(--line-firm);
+    border-radius: 100px; padding: .42rem .95rem;
+    text-decoration: none; color: var(--ink);
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .repo:hover { border-color: var(--orange-lit); transform: translateY(-1px); }
+  .repo .dot {
+    width: .45rem; height: .45rem; border-radius: 50%;
+    background: var(--orange-lit); flex: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+<style>
+  /* Reset the artifact host normally provides. */
+  html { color-scheme: light dark; }
+  body { margin: 0; }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <span class="tag">Kuku · AI Generalist Assignment</span>
+    <h1>Find the Promos</h1>
+    <p class="lede">
+      A tool that reads 50 microdrama screenplays and returns a ranked shortlist of
+      20&ndash;60 second promo clips &mdash; with exact in and out timecodes, the hook,
+      the cliffhanger, and one line on why each works.
+    </p>
+
+    <div class="funnel">
+      <div class="fstep" style="--step: var(--ink-faint)">
+        <span class="n">50</span>
+        <span class="l">episodes</span>
+        <span class="by">input pack</span>
+      </div>
+      <div class="fstep" style="--step: var(--ember)">
+        <span class="n">3,727</span>
+        <span class="l">timed beats</span>
+        <span class="by">parser · code</span>
+      </div>
+      <div class="fstep" style="--step: var(--amber)">
+        <span class="n">200</span>
+        <span class="l">candidate clips</span>
+        <span class="by">heuristics · code</span>
+      </div>
+      <div class="fstep" style="--step: var(--orange-lit)">
+        <span class="n">20</span>
+        <span class="l">ranked promos</span>
+        <span class="by">judge · AI</span>
+      </div>
+    </div>
+
+    <div class="byline">
+      <span class="name">Anshu Kumar Sharma</span>
+      <span class="enrol"><span class="lbl">Enrolment</span>22322008</span>
+      <span class="meta">Problem 1</span>
+    </div>
+  </header>
+
+  <section>
+    <p class="eyebrow">01 — Problem choice</p>
+    <h2>Why this problem</h2>
+    <p>
+      It is the only one of the three with a real input pack and an output you can check
+      against a stated definition. The pain is concrete and recurring: an editor watches
+      50 episodes of every show by hand, and Kuku ships a show a week, so the cost grows
+      with the catalogue while the editor&rsquo;s hours don&rsquo;t. It is also narrow
+      enough to finish &mdash; find moments and boundaries, not cut video.
+    </p>
+  </section>
+
+  <section>
+    <p class="eyebrow">02 — Where the brief was silent</p>
+    <h2>Assumptions I made</h2>
+    <ol class="clean">
+      <li><span>Screenplay timestamps match the rendered video 1:1.</span></li>
+      <li><span>20&ndash;60s inclusive; the hook must land in the first 3 seconds.</span></li>
+      <li><span>Clips cut on beat boundaries, never mid-line.</span></li>
+      <li><span>&ldquo;Makes sense on its own&rdquo; is judged on the clip alone, not the series.</span></li>
+      <li><span>Multi-segment promos allowed; a continuous stretch preferred.</span></li>
+      <li><span>Spoiler risk rises with episode number &mdash; a proxy, since there is no audience data.</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <p class="eyebrow">03 — Approach</p>
+    <h2>How it works</h2>
+
+    <div class="pipe">
+      <div class="st code"><b>parse</b><span>code</span></div>
+      <div class="st code"><b>candidates</b><span>code</span></div>
+      <div class="st ai"><b>judge</b><span>AI</span></div>
+      <div class="st code"><b>rank</b><span>code</span></div>
+      <div class="st code"><b>render</b><span>code</span></div>
+    </div>
+
+    <div class="thesis">
+      <p class="big">The one design rule: the model never emits a timestamp.</p>
+      <p>
+        The parser turns every scene, line and action into a <em>beat</em> with an id and
+        exact times &mdash; 50 episodes, <strong>3,727 beats, 0 parse warnings</strong>.
+        The LLM only selects beat ids and writes prose; code maps ids back to times.
+        A hallucinated timestamp is impossible by construction.
+      </p>
+
+      <div class="chain">
+        <div class="cell">
+          <span class="cap">Code gives the model</span>
+          <span class="idpill">[E01.B076]</span> &ldquo;I am the daughter they choose.&rdquo;
+        </div>
+        <div class="arrow" aria-hidden="true">&rarr;</div>
+        <div class="cell">
+          <span class="cap">Code maps it back</span>
+          <span class="idpill">E01.B076</span> = <span class="time">01:51.10</span>
+        </div>
+      </div>
+
+      <p style="margin-top:1rem">
+        Validation rejects any id not in the candidate, or any illegal duration &mdash;
+        it fired <strong>8 times in 200</strong>, each logged in <code>run_report.json</code>.
+      </p>
+    </div>
+
+    <div class="tbox">
+      <table class="split">
+        <caption>What stayed deterministic, and what was handed to judgement</caption>
+        <thead>
+          <tr><th scope="col">Kept as code</th><th scope="col">Given to the AI</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Parsing, timestamps, beat ids</td><td>Is this actually a hook?</td></tr>
+          <tr><td>20&ndash;60s limits, boundary snapping</td><td>Does it cut on something unresolved?</td></tr>
+          <tr><td>Candidate generation and pruning</td><td>Would a stranger follow it?</td></tr>
+          <tr><td>Ranking, diversity, dedupe</td><td>The hook / cliffhanger / why lines</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Heuristics cut 3,727 beats to <strong>200 candidates</strong>, 4 per episode. That is
+      cost control, not judgement: it fixes the per-show bill before the run starts. Ranking
+      is code so a human can read and argue with the policy instead of finding it buried in
+      a prompt. The model <strong>tightened the boundaries on 118 of 200</strong> candidates,
+      so the beat-id mechanism is doing real work, not being rubber-stamped.
+    </p>
+    <p>
+      The output is a ranked shortlist of 20 clips for an editor to approve &mdash; not a
+      publishing decision.
+    </p>
+  </section>
+
+  <section>
+    <p class="eyebrow">04 — Quality checking</p>
+    <h2>Does it work?</h2>
+
+    <div class="stats">
+      <div class="stat ok"><span class="v">0</span><span class="k">parse warnings in 3,727 beats</span></div>
+      <div class="stat ok"><span class="v">200/200</span><span class="k">candidates judged, 0 API failures</span></div>
+      <div class="stat ok"><span class="v">100%</span><span class="k">timecodes verified against source</span></div>
+      <div class="stat"><span class="v">8</span><span class="k">invalid model boundaries caught</span></div>
+    </div>
+
+    <p>
+      Mechanically, checked by <code>eval/test_parse.py</code> and
+      <code>eval/verify_outputs.py</code> &mdash; which re-parses the scripts independently
+      and trusts nothing the pipeline says. Then I hand-labelled 30 clips, stratified across
+      the top of the slate, the tail, and the rejects, by reading each clip&rsquo;s
+      <strong>actual beats</strong> &mdash; never the model&rsquo;s description of its own pick.
+    </p>
+
+    <div class="tbox">
+      <table>
+        <caption>30 clips graded against the brief&rsquo;s three criteria</caption>
+        <thead>
+          <tr>
+            <th scope="col">Slice</th>
+            <th scope="col" class="num">n</th>
+            <th scope="col" class="num">good</th>
+            <th scope="col" class="num">borderline</th>
+            <th scope="col" class="num">bad</th>
+            <th scope="col">Reading</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Top 10</td><td class="num">10</td><td class="num">6</td>
+            <td class="num">3</td><td class="num">1</td>
+            <td class="verdict g">60% clean · 90% usable</td>
+          </tr>
+          <tr>
+            <td>Whole slate</td><td class="num">18</td><td class="num">8</td>
+            <td class="num">8</td><td class="num">2</td>
+            <td class="verdict g">44% clean · 89% usable</td>
+          </tr>
+          <tr>
+            <td>Rejects</td><td class="num">12</td><td class="num">0</td>
+            <td class="num">4</td><td class="num">8</td>
+            <td class="verdict w">67% correctly dropped</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Three defects found by labelling were fixed and re-measured: top-10 went
+      <strong>30% &rarr; 60% clean</strong>, at the cost of reject precision falling
+      77% &rarr; 67%.
+    </p>
+  </section>
+
+  <section>
+    <p class="eyebrow">05 — Honest failures</p>
+    <h2>Where it picks badly</h2>
+
+    <div class="fails">
+      <div class="fail">
+        <span class="sev">Top failure · 6 of 30</span>
+        <h4>Soft endings</h4>
+        <p>
+          The model scores cliffhanger 4/5 and the clip still cuts on a resolution &mdash;
+          #3 ends on a flirt. Absolute 1&ndash;5 scoring is the cause:
+          <code>standalone</code> has sd 0.66 and <strong>not one clip in 200 scored
+          below 2</strong>.
+        </p>
+      </div>
+      <div class="fail">
+        <span class="sev">Over-correction</span>
+        <h4>Slightly too harsh at the gate</h4>
+        <p>
+          4 of 12 sampled rejects were clips I would have posted &mdash; including one
+          ending on the single word &ldquo;Arsenic.&rdquo;
+        </p>
+      </div>
+      <div class="fail">
+        <span class="sev">Dead signal</span>
+        <h4>Spoiler risk does nothing</h4>
+        <p>
+          198 of 200 clips scored 1 or 2, so the &minus;0.10 spoiler weight barely moves
+          the ranking. Episode position is a weak proxy.
+        </p>
+      </div>
+      <div class="fail ceiling">
+        <span class="sev">Structural ceiling</span>
+        <h4>It reads prose, not frames</h4>
+        <p>
+          A striking image with no dialogue or action verb is systematically underrated.
+          This is a limit of any text-only approach, not a bug that can be tuned away.
+          Stitched promos likewise ship flagged
+          <code>stitch_unverified_continuity</code> &mdash; the tool cannot confirm two
+          shots cut together cleanly.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">06 — Scale</p>
+    <h2>Cost at real volume</h2>
+    <p>
+      200 calls per show, roughly 230k tokens. Two free-tier limits bind:
+      <strong>15 requests/minute</strong>, which sets the ~16 minute wall time, and
+      <strong>500 requests/day</strong>, which caps you at <strong>~2.5 shows per
+      day</strong>. I hit the daily wall during testing &mdash; it is the limit that would
+      actually bite a team shipping weekly. A paid tier removes both: under a minute,
+      cents per show.
+    </p>
+    <p>
+      Cost scales with <code>--per-episode</code>, not episode length, so a new show&rsquo;s
+      budget is known before it runs. <code>--reuse-judgements</code> re-ranks a past run
+      for free &mdash; which is how the ranking was tuned without spending quota. Swapping
+      the model is a flag (<code>--provider gemini|openai|groq|anthropic</code>), or
+      <code>--no-llm</code> to run with no key at all.
+    </p>
+  </section>
+
+  <section>
+    <p class="eyebrow">07 — Tooling</p>
+    <h2>Where the AI got it wrong</h2>
+    <p>
+      Built with <strong>Claude (Claude Code)</strong>; <strong>Gemini 3.1 Flash Lite</strong>
+      judges inside the tool. Four real errors, all caught by tests or measurement:
+    </p>
+    <ol class="clean">
+      <li><span>
+        <strong>Claude used a retired model id</strong> (<code>gemini-2.0-flash</code>, 404)
+        &mdash; the API had to tell us. Fixed by listing models from the API instead of
+        trusting memory.
+      </span></li>
+      <li><span>
+        <strong>Claude&rsquo;s windowing assumed beats were time-ordered.</strong> They are
+        not: <code>CAMERA</code> and <code>DIALOGUE</code> are parallel tracks that step
+        backwards up to 1.0s in 8 places. Caught only because a test asserted the invariant.
+      </span></li>
+      <li><span>
+        <strong>My own lexicon scored a cosy scene as violence</strong> &mdash;
+        <code>crack(ing)</code> matched &ldquo;<strong>crackling</strong> hearth fire&rdquo;
+        and <code>fires?</code> matched &ldquo;hearth <strong>fire</strong>&rdquo;, ranking a
+        bandaging scene 19th.
+      </span></li>
+      <li><span>
+        <strong>Bigger model, same answer, 100&times; the time.</strong> A reasoning-grade
+        Gemini took ~245s per judgement versus ~2.5s for flash-lite, returning identical
+        scores. Separately, one run hung <strong>two hours on 2.2 seconds of CPU</strong>
+        &mdash; the SDK has no default HTTP timeout.
+      </span></li>
+    </ol>
+  </section>
+
+  <section>
+    <p class="eyebrow">08 — Next</p>
+    <h2>What I&rsquo;d do next</h2>
+    <ul class="clean">
+      <li><span>
+        Replace absolute 1&ndash;5 scoring with <strong>pairwise comparison</strong> &mdash;
+        which is what both the compressed distributions and the soft-ending failure point to.
+      </span></li>
+      <li><span>
+        Learn the ranking weights from real watch-through data instead of hand-setting them.
+      </span></li>
+      <li><span>
+        Sample keyframes for the top candidates to close the text-only gap.
+      </span></li>
+    </ul>
+
+    <p style="margin-top:1.6rem">
+      <a class="repo" href="https://github.com/Anshu2003-commits/Kuku_assignment">
+        <span class="dot" aria-hidden="true"></span>
+        github.com/Anshu2003-commits/Kuku_assignment
+      </a>
+    </p>
+  </section>
+
+  <footer>
+    <span><span class="fname">Anshu Kumar Sharma</span>&nbsp;&nbsp;<span class="fenrol">22322008</span></span>
+    <span class="mono">Problem 1 &mdash; Find the Promos</span>
+  </footer>
+
+</div>
+</body>
+</html>

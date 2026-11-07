@@ -4,6 +4,11 @@ Reads a folder of microdrama screenplays and returns a ranked shortlist of
 20–60 second promo clips, each with exact start/end timecodes, the hook, the
 cliffhanger, and one line on why it works.
 
+**Read the solution doc:** <https://anshu2003-commits.github.io/Kuku_assignment/>
+· [PDF version](SOLUTION.pdf)
+
+*Anshu Kumar Sharma · Enrolment 22322008 · Problem 1*
+
 **The core design rule: the model never emits a timestamp.** The parser turns
 every scene, line and action into a *beat* with an id and exact times. The LLM
 only ever selects beat ids and writes prose; code maps ids back to times. A
