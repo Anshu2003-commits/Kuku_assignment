@@ -739,7 +739,12 @@
     padding: .38rem .8rem; border-radius: 999px; border: 1px solid var(--line-firm); color: var(--ink);
   }
   .topbar a.tb.red { background: var(--red-lit); border-color: var(--red-lit); color: #fff; }
-  @media (max-width: 560px) { .topbar .who { display: none; } }
+  @media (max-width: 560px) {
+    .topbar .who, .topbar .gh { display: none; }
+    .topbar .in { flex-wrap: nowrap; padding: .5rem .75rem; gap: .35rem; }
+    .topbar .brand { font-size: .9rem; white-space: nowrap; }
+    .topbar a.tb { font-size: .72rem; padding: .32rem .6rem; }
+  }
   .downloads { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: .8rem; }
   .downloads a {
     flex: 1 1 14rem; text-decoration: none; color: var(--ink);
@@ -747,6 +752,32 @@
   }
   .downloads a b { display: block; color: var(--red); }
   .downloads a span { font-size: .8rem; color: var(--ink-soft); }
+
+  /* ---- tabs: one section group at a time ------------------------------ */
+  .tabs {
+    position: sticky; top: var(--tb, 3.1rem); z-index: 40; display: flex; gap: .25rem;
+    overflow-x: auto; scrollbar-width: none; margin: 1.2rem 0 0;
+    background: var(--ground); border-bottom: 1px solid var(--line); padding-top: .3rem;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tabs a {
+    flex: 0 0 auto; padding: .55rem .85rem; font-weight: 700; font-size: .88rem;
+    color: var(--ink-soft); text-decoration: none; border-bottom: 2px solid transparent; margin-bottom: -1px;
+  }
+  .tabs a[aria-selected="true"] { color: var(--red); border-bottom-color: var(--red); }
+  html.js section[data-tab]:not(.on) { display: none; }
+  html.js .promos.clamp > .promo:nth-child(n+5) { display: none; }
+  @media (min-width: 720px) {
+    .promos { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+    .promos > .promo { margin: 0; }
+  }
+  .more {
+    display: block; margin: .9rem auto 0; font: inherit; font-weight: 700; font-size: .85rem;
+    padding: .5rem 1.1rem; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--line-firm); background: var(--surface); color: var(--ink);
+  }
+  .more:hover { border-color: var(--red); }
+  .hero { padding-bottom: .5rem; }
 </style>
 <style>
   html { color-scheme: light dark; }
@@ -762,7 +793,7 @@
     <span class="who">Anshu Kumar Sharma &middot; 22322008</span>
     <a class="tb red" href="promo-finder-solution-anshu.pdf" download>Solution deck</a>
     <a class="tb" href="outputs/promos.csv" download>Promos CSV</a>
-    <a class="tb" href="https://github.com/Anshu2003-commits/Kuku_assignment">GitHub</a>
+    <a class="tb gh" href="https://github.com/Anshu2003-commits/Kuku_assignment">GitHub</a>
   </div>
 </nav>
 <div class="wrap">
@@ -819,7 +850,15 @@
     </div>
   </header>
 
-  <section id="try">
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <a role="tab" href="#tab-try" data-t="try">Try it</a>
+    <a role="tab" href="#tab-results" data-t="results">Results</a>
+    <a role="tab" href="#tab-how" data-t="how">How it works</a>
+    <a role="tab" href="#tab-eval" data-t="eval">Evaluation</a>
+    <a role="tab" href="#tab-notes" data-t="notes">Notes</a>
+  </nav>
+
+  <section data-tab="try" id="try">
     <p class="eyebrow">01 &mdash; Try it</p>
     <h2>Run it on your own episodes</h2>
     <p>
@@ -885,7 +924,7 @@ Hard cut to a wide shot of a silent office."></textarea>
     </div>
   </section>
 
-  <section>
+  <section data-tab="how">
     <p class="eyebrow">02 &mdash; Problem choice</p>
     <h2>Why this problem</h2>
     <p>
@@ -897,7 +936,7 @@ Hard cut to a wide shot of a silent office."></textarea>
     </p>
   </section>
 
-  <section>
+  <section data-tab="how">
     <p class="eyebrow">03 &mdash; Where the brief was silent</p>
     <h2>Assumptions I made</h2>
     <ol class="clean">
@@ -910,7 +949,7 @@ Hard cut to a wide shot of a silent office."></textarea>
     </ol>
   </section>
 
-  <section>
+  <section data-tab="how">
     <p class="eyebrow">04 &mdash; Approach</p>
     <h2>How it works</h2>
 
@@ -978,7 +1017,7 @@ Hard cut to a wide shot of a silent office."></textarea>
   </section>
 
 
-  <section id="output">
+  <section data-tab="results" id="output">
     <p class="eyebrow">05 &mdash; The actual output</p>
     <h2>What it produced</h2>
     <p>
@@ -1178,6 +1217,7 @@ Hard cut to a wide shot of a silent office."></textarea>
         </div>
       </article>
     </div>
+    <button type="button" class="more" id="showAll" hidden>Show all 10 promos</button>
     <h3>Downloads</h3>
     <div class="downloads">
       <a href="promo-finder-solution-anshu.pdf" download><b>&darr; Solution deck (PDF)</b><span>The 2-page write-up</span></a>
@@ -1190,7 +1230,7 @@ Hard cut to a wide shot of a silent office."></textarea>
     </p>
   </section>
 
-  <section>
+  <section data-tab="eval">
     <p class="eyebrow">06 &mdash; Quality checking</p>
     <h2>Does it work?</h2>
 
@@ -1249,7 +1289,7 @@ Hard cut to a wide shot of a silent office."></textarea>
     </p>
   </section>
 
-  <section>
+  <section data-tab="eval">
     <p class="eyebrow">07 &mdash; Honest failures</p>
     <h2>Where it picks badly</h2>
 
@@ -1296,7 +1336,7 @@ Hard cut to a wide shot of a silent office."></textarea>
     </div>
   </section>
 
-  <section>
+  <section data-tab="eval">
     <p class="eyebrow">08 &mdash; Scale</p>
     <h2>Cost at real volume</h2>
     <p>
@@ -1316,7 +1356,7 @@ Hard cut to a wide shot of a silent office."></textarea>
     </p>
   </section>
 
-  <section>
+  <section data-tab="notes">
     <p class="eyebrow">09 &mdash; Tooling</p>
     <h2>Where the AI got it wrong</h2>
     <p>
@@ -1349,7 +1389,7 @@ Hard cut to a wide shot of a silent office."></textarea>
     </ol>
   </section>
 
-  <section>
+  <section data-tab="notes">
     <p class="eyebrow">10 &mdash; Next</p>
     <h2>What I&rsquo;d do next</h2>
     <ul class="clean">
@@ -1810,6 +1850,41 @@ function generateCandidates(ep, topN = 4) {
   });
 })();
 
+</script>
+<script>
+(function () {
+  document.documentElement.classList.add("js");
+  var tabs = [].slice.call(document.querySelectorAll(".tabs a"));
+  var secs = [].slice.call(document.querySelectorAll("section[data-tab]"));
+  var bar = document.querySelector(".tabs");
+  var top = document.querySelector(".topbar");
+  function fit() { document.documentElement.style.setProperty("--tb", top.offsetHeight + "px"); }
+  fit(); window.addEventListener("resize", fit);
+  function show(t, scroll) {
+    if (!tabs.some(function (a) { return a.dataset.t === t; })) t = "try";
+    tabs.forEach(function (a) { a.setAttribute("aria-selected", a.dataset.t === t ? "true" : "false"); });
+    secs.forEach(function (s) { s.classList.toggle("on", s.dataset.tab === t); });
+    tabs.forEach(function (a) { if (a.dataset.t === t) bar.scrollLeft = a.offsetLeft - 16; });
+    if (scroll) window.scrollTo({ top: bar.offsetTop - top.offsetHeight, behavior: "smooth" });
+  }
+  tabs.forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      e.preventDefault(); show(a.dataset.t, true);
+      history.replaceState(null, "", "#tab-" + a.dataset.t);
+    });
+  });
+  var h = location.hash.replace("#tab-", "").replace("#", "");
+  var map = { output: "results", "try": "try" };
+  show(map[h] || h, false);
+  var promos = document.querySelector(".promos"), btn = document.getElementById("showAll");
+  if (promos && btn && promos.children.length > 4) {
+    promos.classList.add("clamp"); btn.hidden = false;
+    btn.addEventListener("click", function () {
+      var c = promos.classList.toggle("clamp");
+      btn.textContent = c ? "Show all " + promos.children.length + " promos" : "Show fewer";
+    });
+  }
+})();
 </script>
 </body>
 </html>
