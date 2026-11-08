@@ -719,6 +719,34 @@
   }
   .dcand .open { padding: 0 .8rem .6rem; }
   .dcand .dtable-wrap { margin: 0 .8rem .8rem; max-height: 16rem; }
+
+  /* ---- sticky top bar ------------------------------------------------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--ground) 88%, transparent);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar .in {
+    max-width: var(--maxw); margin: 0 auto; padding: .6rem 1rem;
+    display: flex; align-items: center; gap: .5rem; flex-wrap: wrap;
+  }
+  .topbar .brand { font-family: var(--disp); font-weight: 900; color: var(--ink); text-decoration: none; margin-right: auto; }
+  .topbar .brand b { color: var(--red); }
+  .topbar .who { font-family: var(--mono); font-size: .7rem; color: var(--ink-faint); }
+  .topbar a.tb { background: transparent;
+    font-size: .78rem; font-weight: 700; text-decoration: none; white-space: nowrap;
+    padding: .38rem .8rem; border-radius: 999px; border: 1px solid var(--line-firm); color: var(--ink);
+  }
+  .topbar a.tb.red { background: var(--red-lit); border-color: var(--red-lit); color: #fff; }
+  @media (max-width: 560px) { .topbar .who { display: none; } }
+  .downloads { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: .8rem; }
+  .downloads a {
+    flex: 1 1 14rem; text-decoration: none; color: var(--ink);
+    border: 1px solid var(--line-firm); border-radius: var(--r); padding: .8rem 1rem; background: var(--surface);
+  }
+  .downloads a b { display: block; color: var(--red); }
+  .downloads a span { font-size: .8rem; color: var(--ink-soft); }
 </style>
 <style>
   html { color-scheme: light dark; }
@@ -728,6 +756,15 @@
 </style>
 </head>
 <body>
+<nav class="topbar" aria-label="Site">
+  <div class="in">
+    <a class="brand" href="#">kuku<b>.</b> Promo Finder</a>
+    <span class="who">Anshu Kumar Sharma &middot; 22322008</span>
+    <a class="tb red" href="promo-finder-solution-anshu.pdf" download>Solution deck</a>
+    <a class="tb" href="outputs/promos.csv" download>Promos CSV</a>
+    <a class="tb" href="https://github.com/Anshu2003-commits/Kuku_assignment">GitHub</a>
+  </div>
+</nav>
 <div class="wrap">
 
   <header class="hero">
@@ -744,7 +781,7 @@
           <span class="dot" aria-hidden="true"></span>
           github.com/Anshu2003-commits/Kuku_assignment
         </a>
-        <a class="repo pdf" href="https://github.com/Anshu2003-commits/Kuku_assignment/raw/main/promo-finder-solution-anshu.pdf">
+        <a class="repo pdf" href="promo-finder-solution-anshu.pdf" download>
           <span class="dl" aria-hidden="true">&darr;</span>
           2-page deck (PDF)
         </a>
@@ -1140,6 +1177,12 @@ Hard cut to a wide shot of a silent office."></textarea>
           <span class="sp"><b>2</b>/5 spoiler</span>
         </div>
       </article>
+    </div>
+    <h3>Downloads</h3>
+    <div class="downloads">
+      <a href="promo-finder-solution-anshu.pdf" download><b>&darr; Solution deck (PDF)</b><span>The 2-page write-up</span></a>
+      <a href="outputs/promos.csv" download><b>&darr; All 20 promos (CSV)</b><span>Rank, timecodes, hook, cliffhanger, why, scores</span></a>
+      <a href="outputs/promos.json" download><b>&darr; Full records (JSON)</b><span>Beat ids and every score</span></a>
     </div>
     <p class="note">
       All 20 promos, plus every rejected candidate and the model&rsquo;s reasoning,
