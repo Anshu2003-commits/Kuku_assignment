@@ -12,33 +12,34 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#127916;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&family=Caveat:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
 
 <style>
   /* ---- tokens: light is the base, dark overrides ---------------------- */
   :root {
-    --ink:       #1B1410;
-    --ink-soft:  #5C4F47;
-    --ink-faint: #8A7F77;
-    --ground:    #FFFBF7;
-    --surface:   #FFF4EC;
-    --surface-2: #FFEADD;
-    --line:      #EBDCD0;
-    --line-firm: #D8C4B4;
+    /* Kuku brand red + zinc neutrals, read off kuku.app's stylesheet */
+    --ink:       #09090B;
+    --ink-soft:  #52525B;
+    --ink-faint: #71717A;
+    --ground:    #FFFFFF;
+    --surface:   #FAFAFA;
+    --surface-2: #F4F4F5;
+    --line:      #E4E4E7;
+    --line-firm: #D4D4D8;
 
-    --orange:    #E2500A;
-    --orange-lit:#FF641C;
-    --amber:     #B6790A;
-    --amber-lit: #FFBB10;
-    --ember:     #C35F12;
+    --red:       #EC1C24;
+    --red-lit:   #EC1C24;
+    --red-deep:  #C3161D;
+    --red-soft:  #FF4D52;
 
-    --good:      #1C7A3E;
-    --warn:      #A8600B;
-    --bad:       #B3301C;
+    --good:      #0E9F6E;
+    --warn:      #B45309;
+    --bad:       #C3161D;
 
-    --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
-    --sans: "IBM Plex Sans", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
-    --disp: "Bricolage Grotesque", "IBM Plex Sans", ui-sans-serif, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans: "Figtree", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --disp: "Figtree", ui-sans-serif, system-ui, sans-serif;
+    --hand: "Caveat", "Segoe Script", cursive;
 
     --maxw: 50rem;
     --r: 10px;
@@ -46,46 +47,44 @@
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --ink:       #F6EFE9;
-      --ink-soft:  #BCADA2;
-      --ink-faint: #8A7B70;
-      --ground:    #17110D;
-      --surface:   #211810;
-      --surface-2: #2C2017;
-      --line:      #342619;
-      --line-firm: #4A3626;
+      --ink:       #FAFAFA;
+      --ink-soft:  #A1A1AA;
+      --ink-faint: #71717A;
+      --ground:    #09090B;
+      --surface:   #18181B;
+      --surface-2: #27272A;
+      --line:      #27272A;
+      --line-firm: #3F3F46;
 
-      --orange:    #FF7A3C;
-      --orange-lit:#FF641C;
-      --amber:     #FFBB10;
-      --amber-lit: #FFD166;
-      --ember:     #E07A2C;
+      --red:       #FF4747;
+      --red-lit:   #EC1C24;
+      --red-deep:  #FF7676;
+      --red-soft:  #FF4D52;
 
-      --good:      #58C98A;
-      --warn:      #EFB54A;
-      --bad:       #FF8B72;
+      --good:      #2BD49A;
+      --warn:      #FBBF24;
+      --bad:       #FF7676;
     }
   }
 
   :root[data-theme="dark"] {
-    --ink:       #F6EFE9;
-    --ink-soft:  #BCADA2;
-    --ink-faint: #8A7B70;
-    --ground:    #17110D;
-    --surface:   #211810;
-    --surface-2: #2C2017;
-    --line:      #342619;
-    --line-firm: #4A3626;
+    --ink:     #FAFAFA;
+    --ink-soft:  #A1A1AA;
+    --ink-faint: #71717A;
+    --ground:    #09090B;
+    --surface:   #18181B;
+    --surface-2: #27272A;
+    --line:    #27272A;
+    --line-firm: #3F3F46;
 
-    --orange:    #FF7A3C;
-    --orange-lit:#FF641C;
-    --amber:     #FFBB10;
-    --amber-lit: #FFD166;
-    --ember:     #E07A2C;
+    --red:     #FF4747;
+    --red-lit:   #EC1C24;
+    --red-deep:  #FF7676;
+    --red-soft:  #FF4D52;
 
-    --good:      #58C98A;
-    --warn:      #EFB54A;
-    --bad:       #FF8B72;
+    --good:    #2BD49A;
+    --warn:    #FBBF24;
+    --bad:     #FF7676;
   }
 
   /* ---- base ------------------------------------------------------------ */
@@ -107,9 +106,9 @@
   }
 
   p { margin: 0 0 1em; }
-  a { color: var(--orange); text-underline-offset: 3px; }
+  a { color: var(--red); text-underline-offset: 3px; }
   a:focus-visible,
-  button:focus-visible { outline: 2px solid var(--orange-lit); outline-offset: 3px; }
+  button:focus-visible { outline: 2px solid var(--red-lit); outline-offset: 3px; }
 
   strong { font-weight: 600; color: var(--ink); }
   em { font-style: italic; color: var(--ink); }
@@ -148,7 +147,7 @@
     font-weight: 600;
     letter-spacing: .15em;
     text-transform: uppercase;
-    color: var(--orange);
+    color: var(--red);
     margin: 0 0 .7rem;
   }
 
@@ -165,14 +164,12 @@
   }
   .tag {
     display: inline-flex; align-items: center; gap: .55rem;
-    font-family: var(--mono); font-size: .72rem; font-weight: 600;
+    font-family: var(--mono); font-size: .72rem; font-weight: 700;
     letter-spacing: .12em; text-transform: uppercase;
-    color: var(--ground);
-    background: linear-gradient(100deg, var(--orange-lit), var(--amber));
+    color: #FFFFFF;                 /* red chip is the same in both themes */
+    background: var(--red-lit);
     padding: .36rem .7rem; border-radius: 100px;
   }
-  :root[data-theme="dark"] .tag,
-  :root:not([data-theme="light"]) .tag { color: #17110D; }
 
   h1 {
     font-family: var(--disp);
@@ -211,7 +208,7 @@
     font-weight: 600;
     font-variant-numeric: tabular-nums;
     letter-spacing: -.01em;
-    color: var(--orange);
+    color: var(--red);
   }
   .byline .enrol .lbl {
     font-size: .6em; font-weight: 600; letter-spacing: .12em;
@@ -221,6 +218,24 @@
     font-family: var(--mono); font-size: .76rem; font-weight: 500;
     letter-spacing: .1em; text-transform: uppercase;
     color: var(--ink-faint);
+  }
+
+  /* ---- handwritten margin note (Caveat, Kuku's accent face) ----------- */
+  .hand {
+    font-family: var(--hand);
+    font-size: 1.22rem;
+    line-height: 1.3;
+    color: var(--red);
+    display: flex; align-items: flex-start; gap: .5rem;
+    margin: -.3rem 0 1.3rem;
+  }
+  .hand::before {
+    content: "";
+    width: 1.5rem; height: .9rem; flex: none; margin-top: .45rem;
+    border-left: 2px solid var(--red);
+    border-bottom: 2px solid var(--red);
+    border-bottom-left-radius: 8px;
+    opacity: .55;
   }
 
   /* ---- funnel ---------------------------------------------------------- */
@@ -271,7 +286,7 @@
   .thesis {
     background: var(--surface);
     border: 1px solid var(--line);
-    border-left: 3px solid var(--orange-lit);
+    border-left: 3px solid var(--red-lit);
     border-radius: var(--r);
     padding: 1.3rem 1.4rem;
     margin: 0 0 1.4rem;
@@ -308,11 +323,11 @@
     text-transform: uppercase; color: var(--ink-faint); margin-bottom: .3rem;
   }
   .chain .arrow {
-    display: flex; align-items: center; color: var(--orange);
+    display: flex; align-items: center; color: var(--red);
     font-size: 1rem; font-weight: 600;
   }
-  .chain .idpill { color: var(--orange); font-weight: 600; }
-  .chain .time { color: var(--amber); font-weight: 600; }
+  .chain .idpill { color: var(--red); font-weight: 600; }
+  .chain .time { color: var(--red-soft); font-weight: 600; }
   @media (max-width: 560px) {
     .chain { grid-template-columns: 1fr; }
     .chain .arrow { transform: rotate(90deg); justify-content: center; }
@@ -336,10 +351,10 @@
   }
   .pipe .st.code span { color: var(--ink-faint); }
   .pipe .st.ai {
-    border-color: var(--orange-lit);
-    background: color-mix(in srgb, var(--orange-lit) 10%, var(--surface));
+    border-color: var(--red-lit);
+    background: color-mix(in srgb, var(--red-lit) 10%, var(--surface));
   }
-  .pipe .st.ai span { color: var(--orange); }
+  .pipe .st.ai span { color: var(--red); }
 
   /* ---- tables ---------------------------------------------------------- */
   .tbox { overflow-x: auto; margin: 0 0 1.4rem; }
@@ -374,7 +389,7 @@
 
   /* split table: code vs AI */
   .split thead th:first-child { color: var(--ink-faint); }
-  .split thead th:last-child { color: var(--orange); }
+  .split thead th:last-child { color: var(--red); }
   .split td:last-child { color: var(--ink-soft); }
 
   /* ---- lists ----------------------------------------------------------- */
@@ -388,10 +403,10 @@
   ol.clean li::before {
     counter-increment: n; content: counter(n, decimal-leading-zero);
     font-family: var(--mono); font-size: .72rem; font-weight: 600;
-    color: var(--orange); padding-top: .22em;
+    color: var(--red); padding-top: .22em;
   }
   ul.clean li::before {
-    content: "—"; font-family: var(--mono); color: var(--amber);
+    content: "—"; font-family: var(--mono); color: var(--red-soft);
     font-weight: 600; padding-top: .02em;
   }
 
@@ -447,7 +462,7 @@
   }
   footer .fenrol {
     font-family: var(--mono); font-size: 1rem; font-weight: 600;
-    font-variant-numeric: tabular-nums; color: var(--orange);
+    font-variant-numeric: tabular-nums; color: var(--red);
   }
 
   .hero .repo { margin-bottom: .4rem; }
@@ -459,10 +474,10 @@
     text-decoration: none; color: var(--ink);
     transition: border-color .15s ease, transform .15s ease;
   }
-  .repo:hover { border-color: var(--orange-lit); transform: translateY(-1px); }
+  .repo:hover { border-color: var(--red-lit); transform: translateY(-1px); }
   .repo .dot {
     width: .45rem; height: .45rem; border-radius: 50%;
-    background: var(--orange-lit); flex: none;
+    background: var(--red-lit); flex: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -483,7 +498,7 @@
   .rank {
     font-family: var(--mono); font-size: .8rem; font-weight: 700;
     font-variant-numeric: tabular-nums; color: var(--ground);
-    background: var(--orange-lit); border-radius: 6px;
+    background: var(--red-lit); border-radius: 6px;
     padding: .12rem .4rem; flex: none;
   }
   .ptc { display: flex; flex-wrap: wrap; gap: .3rem; flex: 1 1 auto; }
@@ -499,11 +514,11 @@
     border-radius: 100px; padding: .16rem .5rem; flex: none;
   }
   .chip.dur { color: var(--ink-faint); border: 1px solid var(--line-firm); }
-  .chip.stitch { color: var(--amber); border: 1px solid var(--amber); }
+  .chip.stitch { color: var(--red-soft); border: 1px solid var(--red-soft); }
   .pbody { margin: 0; display: grid; gap: .1rem .8rem; grid-template-columns: 1fr; }
   .pbody dt {
     font-family: var(--mono); font-size: .62rem; font-weight: 600;
-    letter-spacing: .11em; text-transform: uppercase; color: var(--orange);
+    letter-spacing: .11em; text-transform: uppercase; color: var(--red);
     margin-top: .45rem;
   }
   .pbody dt:first-child { margin-top: 0; }
@@ -552,22 +567,24 @@
         <span class="l">episodes</span>
         <span class="by">input pack</span>
       </div>
-      <div class="fstep" style="--step: var(--ember)">
+      <div class="fstep" style="--step: var(--red-deep)">
         <span class="n">3,727</span>
         <span class="l">timed beats</span>
         <span class="by">parser · code</span>
       </div>
-      <div class="fstep" style="--step: var(--amber)">
+      <div class="fstep" style="--step: var(--red-soft)">
         <span class="n">200</span>
         <span class="l">candidate clips</span>
         <span class="by">heuristics · code</span>
       </div>
-      <div class="fstep" style="--step: var(--orange-lit)">
+      <div class="fstep" style="--step: var(--red-lit)">
         <span class="n">20</span>
         <span class="l">ranked promos</span>
         <span class="by">judge · AI</span>
       </div>
     </div>
+
+    <p class="hand">Each arrow is a decision about what to trust code with, and what to trust judgement with.</p>
 
     <div class="byline">
       <span class="name">Anshu Kumar Sharma</span>
@@ -937,6 +954,8 @@
   <section>
     <p class="eyebrow">06 — Honest failures</p>
     <h2>Where it picks badly</h2>
+
+    <p class="hand">The soft-ending problem is the one I would fix first &mdash; and I know how.</p>
 
     <div class="fails">
       <div class="fail">
