@@ -664,6 +664,61 @@
   }
   .dtable .txt { color: var(--ink-soft); min-width: 16rem; }
   .dtable tr.inwin { background: color-mix(in srgb, var(--red-lit) 7%, transparent); }
+
+  /* ---- drop zone, file list, expandable candidates ---------------------- */
+  .ddrop {
+    display: flex; flex-direction: column; align-items: center; gap: .18rem;
+    text-align: center; cursor: pointer;
+    background: var(--ground);
+    border: 1.5px dashed var(--line-firm); border-radius: 10px;
+    padding: 1.5rem 1rem; margin-bottom: .75rem;
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .ddrop:hover, .ddrop:focus-visible, .ddrop.over {
+    border-color: var(--red); background: var(--surface-2); outline: none;
+  }
+  .ddrop .dicon {
+    font-family: var(--mono); font-size: 1.1rem; font-weight: 700;
+    color: var(--red); line-height: 1;
+  }
+  .ddrop .dmain { font-weight: 600; font-size: .95rem; }
+  .ddrop .dmain code { font-size: .85em; }
+  .ddrop .dsub { font-size: .8rem; color: var(--ink-faint); }
+
+  .dfiles {
+    list-style: none; margin: 0 0 .75rem; padding: 0;
+    max-height: 9rem; overflow-y: auto;
+    border: 1px solid var(--line); border-radius: 8px; background: var(--ground);
+  }
+  .dfiles li {
+    display: flex; justify-content: space-between; gap: 1rem;
+    font-family: var(--mono); font-size: .72rem;
+    padding: .3rem .7rem; border-bottom: 1px solid var(--line);
+  }
+  .dfiles li:last-child { border-bottom: 0; }
+  .dfiles .sz { color: var(--ink-faint); flex: none; }
+
+  .dhrow { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+
+  details.dcand { padding: 0; }
+  details.dcand summary {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem .7rem;
+    cursor: pointer; padding: .6rem .8rem; list-style: none;
+  }
+  details.dcand summary::-webkit-details-marker { display: none; }
+  details.dcand summary::after {
+    content: "+"; margin-left: auto; font-family: var(--mono);
+    color: var(--ink-faint); font-weight: 700;
+  }
+  details.dcand[open] summary::after { content: "−"; }
+  details.dcand summary:hover { background: var(--surface-2); }
+  .dcand .rk {
+    font-family: var(--mono); font-size: .7rem; font-weight: 700;
+    color: #FFFFFF; background: var(--red-lit);
+    border-radius: 5px; padding: .08rem .32rem; flex: none;
+  }
+  .dcand .open { padding: 0 .8rem .6rem; }
+  .dcand .dtable-wrap { margin: 0 .8rem .8rem; max-height: 16rem; }
 </style>
 <style>
   html { color-scheme: light dark; }
@@ -729,65 +784,66 @@
 
   <section id="try">
     <p class="eyebrow">01 &mdash; Try it</p>
-    <h2>Run the parser yourself</h2>
+    <h2>Run it on your own episodes</h2>
     <p>
-      Paste a screenplay and the real pipeline runs in your browser: the parser
-      extracts every beat with its exact timestamp, then the heuristics score
-      each one and slide 20&ndash;60s windows over the episode. This is the
-      deterministic half &mdash; the same logic as the Python, ported and
-      checked against it on all 50 episodes.
+      Drop in a whole show &mdash; one file or fifty &mdash; and the real
+      pipeline runs in your browser. The parser pulls out every beat with its
+      exact timestamp, the heuristics score each one, and 20&ndash;60s windows
+      are generated and de-duplicated across every episode. Nothing is
+      uploaded anywhere; it all runs on your machine.
     </p>
 
     <div class="demo">
+      <div id="d-drop" class="ddrop" tabindex="0" role="button"
+           aria-label="Choose screenplay files, or drop them here">
+        <input id="d-file" type="file" accept=".txt,.text" multiple hidden>
+        <span class="dicon" aria-hidden="true">&#8595;</span>
+        <span class="dmain">Drop screenplay <code>.txt</code> files here</span>
+        <span class="dsub">or <u>choose files</u> &middot; one episode or a whole season</span>
+      </div>
+
       <div class="dbar">
-        <button id="d-sample" class="btn">Load sample screenplay</button>
+        <button id="d-sample" class="btn">Use sample episode</button>
+        <button id="d-paste" class="btn ghost">Paste instead</button>
         <button id="d-run" class="btn primary">Find promos &rarr;</button>
         <button id="d-clear" class="btn ghost">Clear</button>
         <span id="d-status" class="dstatus" role="status" aria-live="polite"></span>
       </div>
 
-      <label class="dlabel" for="d-input">Screenplay</label>
-      <textarea id="d-input" spellcheck="false" rows="9"
-        placeholder="Paste an episode here, or press &quot;Load sample screenplay&quot;.
-
-Expected format:
+      <div id="d-pastebox" hidden>
+        <label class="dlabel" for="d-input">Screenplay text</label>
+        <textarea id="d-input" spellcheck="false" rows="8"
+          placeholder="Paste one episode here.
 
 **CAMERA:**
 Start: (00:00.00) | End: (00:02.40)
 Hard cut to a wide shot of a silent office."></textarea>
+      </div>
+
+      <ul id="d-files" class="dfiles" hidden></ul>
 
       <div id="d-out" hidden>
         <div class="dstats">
+          <div class="dstat"><span class="v" id="s-eps">0</span><span class="k">episodes</span></div>
           <div class="dstat"><span class="v" id="s-beats">0</span><span class="k">beats parsed</span></div>
-          <div class="dstat"><span class="v" id="s-scenes">0</span><span class="k">scenes</span></div>
-          <div class="dstat"><span class="v" id="s-dur">0:00</span><span class="k">duration</span></div>
+          <div class="dstat"><span class="v" id="s-cands">0</span><span class="k">candidate promos</span></div>
           <div class="dstat" id="s-warnbox"><span class="v" id="s-warn">0</span><span class="k">parse warnings</span></div>
         </div>
 
         <div id="d-warnlist" class="dwarn" hidden></div>
 
-        <h3 class="dh">Candidate promos</h3>
+        <div class="dhrow">
+          <h3 class="dh">Ranked candidates</h3>
+          <button id="d-csv" class="btn ghost">Download CSV</button>
+        </div>
         <p class="dnote">
-          Ranked by the heuristic score. In the full pipeline these go to the
-          LLM, which tightens the boundaries and writes the hook and cliffhanger
-          lines &mdash; that step needs an API key and does not run here.
+          Ranked by the heuristic score, de-duplicated across episodes. In the
+          full pipeline these go to the LLM, which tightens each window and
+          writes the hook and cliffhanger lines &mdash; that step needs an API
+          key and does not run in a browser. Click a row to see its beats.
         </p>
         <div id="d-cands" class="dcands"></div>
-
-        <h3 class="dh">Beats, with the timestamps the model never sees</h3>
-        <p class="dnote">
-          Every beat gets an id. The model only ever picks ids; this table is
-          the only thing that knows what time an id means.
-        </p>
-        <div class="dtable-wrap">
-          <table class="dtable">
-            <thead>
-              <tr><th>id</th><th>in</th><th>out</th><th>type</th><th>hook</th><th>cliff</th><th>text</th></tr>
-            </thead>
-            <tbody id="d-beats"></tbody>
-          </table>
-        </div>
-        <button id="d-more" class="btn ghost" hidden>Show all beats</button>
+        <button id="d-more" class="btn ghost" hidden>Show more</button>
       </div>
     </div>
   </section>
@@ -1512,119 +1568,202 @@ function generateCandidates(ep, topN = 4) {
 (function () {
   "use strict";
   var $ = function (id) { return document.getElementById(id); };
-  var input = $("d-input"), out = $("d-out"), status = $("d-status");
-  var MAX_ROWS = 40, allRows = null;
+  var PAGE = 12;
+  var loaded = [];          // [{name, text}]
+  var results = null;       // {episodes, cands, beatsById}
+  var shown = PAGE;
 
   function say(msg, cls) {
-    status.textContent = msg || "";
-    status.className = "dstatus" + (cls ? " " + cls : "");
+    $("d-status").textContent = msg || "";
+    $("d-status").className = "dstatus" + (cls ? " " + cls : "");
   }
-
   function esc(s) {
     return String(s).replace(/[&<>"]/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
     });
   }
+  function epNum(name, i) {
+    var m = /episode[-_ ]?(\d+)/i.exec(name) || /(\d+)/.exec(name);
+    return m ? parseInt(m[1], 10) : i + 1;
+  }
 
-  function renderBeats(ep, scores, winIds, limit) {
-    var tb = $("d-beats"), rows = [];
-    ep.beats.forEach(function (b) {
-      if (rows.length >= limit) return;
-      var s = scores[b.id];
-      rows.push(
-        "<tr" + (winIds.has(b.id) ? ' class="inwin"' : "") + ">" +
-        '<td class="id">' + esc(b.id) + "</td>" +
-        '<td class="m">' + PF.fmt(b.start_s) + "</td>" +
-        '<td class="m">' + PF.fmt(b.end_s) + "</td>" +
-        '<td class="kind">' + esc(b.kind === "DIALOGUE" ? (b.speaker || "DIALOGUE") : b.kind) + "</td>" +
-        '<td class="sc' + (s[0] > 0 ? " hot" : "") + '">' + (s[0] ? s[0].toFixed(1) : "·") + "</td>" +
-        '<td class="sc' + (s[2] > 0 ? " hot" : "") + '">' + (s[2] ? s[2].toFixed(1) : "·") + "</td>" +
-        '<td class="txt">' + esc(b.text.slice(0, 150)) + (b.text.length > 150 ? "…" : "") + "</td>" +
-        "</tr>"
-      );
+  function listFiles() {
+    var ul = $("d-files");
+    if (!loaded.length) { ul.hidden = true; ul.innerHTML = ""; return; }
+    ul.hidden = false;
+    ul.innerHTML = loaded.slice(0, 60).map(function (f) {
+      return "<li><span>" + esc(f.name) + "</span><span class='sz'>" +
+             Math.round(f.text.length / 1024) + " KB</span></li>";
+    }).join("") + (loaded.length > 60
+      ? "<li><span>… and " + (loaded.length - 60) + " more</span><span></span></li>" : "");
+  }
+
+  function addFiles(fileList) {
+    var files = [].slice.call(fileList).filter(function (f) { return /\.(txt|text)$/i.test(f.name); });
+    if (!files.length) { say("Those need to be .txt screenplay files.", "err"); return; }
+    say("Reading " + files.length + " file" + (files.length > 1 ? "s" : "") + "…");
+    var pending = files.length;
+    files.forEach(function (f) {
+      var r = new FileReader();
+      r.onload = function () {
+        loaded.push({ name: f.name, text: String(r.result) });
+        if (--pending === 0) {
+          loaded.sort(function (a, b) { return epNum(a.name, 0) - epNum(b.name, 0); });
+          listFiles();
+          say(loaded.length + " file" + (loaded.length > 1 ? "s" : "") + " ready — press “Find promos”.");
+        }
+      };
+      r.onerror = function () { if (--pending === 0) listFiles(); };
+      r.readAsText(f);
     });
-    tb.innerHTML = rows.join("");
-    $("d-more").hidden = ep.beats.length <= limit;
-    $("d-more").textContent = "Show all " + ep.beats.length + " beats";
   }
 
   function run() {
-    var text = input.value.trim();
-    if (!text) { say("Paste a screenplay first, or load the sample.", "err"); return; }
+    var sources = loaded.slice();
+    var pasted = $("d-input").value.trim();
+    if (!sources.length && pasted) sources = [{ name: "pasted", text: pasted }];
+    if (!sources.length) { say("Add a file, or load the sample first.", "err"); return; }
 
-    var ep;
-    try { ep = PF.parseEpisode(text, 1); }
-    catch (e) { say("Could not parse: " + e.message, "err"); return; }
+    var episodes = [], warnings = [], all = [], byId = {};
+    sources.forEach(function (src, i) {
+      var ep;
+      try { ep = PF.parseEpisode(src.text, epNum(src.name, i)); }
+      catch (e) { warnings.push(src.name + ": " + e.message); return; }
+      if (!ep.beats.length) { warnings.push(src.name + ": no beats found"); return; }
+      ep._file = src.name;
+      episodes.push(ep);
+      ep.beats.forEach(function (b) { byId[b.id] = b; });
+      ep.warnings.forEach(function (w) { warnings.push(src.name + ": " + w); });
+      PF.generateCandidates(ep, 4).forEach(function (c) {
+        c._ep = ep.number; c._file = src.name;
+        all.push(c);
+      });
+    });
 
-    if (!ep.beats.length) {
-      say("No beats found — check the format matches the placeholder.", "err");
-      out.hidden = true;
+    if (!episodes.length) {
+      $("d-out").hidden = true;
+      say("Nothing parsed — check the format matches the sample.", "err");
       return;
     }
 
-    var scores = {};
-    ep.beats.forEach(function (b, i) {
-      scores[b.id] = PF.scoreBeat(b, ep, i ? ep.beats[i - 1] : null);
-    });
-    var cands = PF.generateCandidates(ep, 4);
+    all.sort(function (a, b) { return b.heuristic_score - a.heuristic_score; });
+    results = { episodes: episodes, cands: all, byId: byId };
+    shown = PAGE;
 
-    $("s-beats").textContent = ep.beats.length;
-    $("s-scenes").textContent = ep.scenes.length;
-    $("s-dur").textContent = PF.fmt(ep.duration);
-    $("s-warn").textContent = ep.warnings.length;
-    $("s-warnbox").className = "dstat " + (ep.warnings.length ? "bad" : "good");
+    var beats = episodes.reduce(function (n, e) { return n + e.beats.length; }, 0);
+    $("s-eps").textContent = episodes.length;
+    $("s-beats").textContent = beats.toLocaleString();
+    $("s-cands").textContent = all.length;
+    $("s-warn").textContent = warnings.length;
+    $("s-warnbox").className = "dstat " + (warnings.length ? "bad" : "good");
 
     var wl = $("d-warnlist");
-    if (ep.warnings.length) {
-      wl.innerHTML = ep.warnings.slice(0, 12).map(function (w) {
+    if (warnings.length) {
+      wl.innerHTML = warnings.slice(0, 15).map(function (w) {
         return "<div>! " + esc(w) + "</div>";
       }).join("");
       wl.hidden = false;
-    } else { wl.hidden = true; }
+    } else wl.hidden = true;
 
-    var winIds = new Set(cands.length ? cands[0].beat_ids : []);
-    var byId = {};
-    ep.beats.forEach(function (b) { byId[b.id] = b; });
-
-    $("d-cands").innerHTML = cands.length ? cands.map(function (c, i) {
-      var first = c.beat_ids.map(function (id) { return byId[id]; }).filter(function (b) {
-        return b.kind === "DIALOGUE" || b.kind === "ACTION" || b.kind === "SOUND FX";
-      })[0];
-      return '<div class="dcand">' +
-        '<div class="top">' +
-          '<span class="tcode">' + PF.fmt(c.start_s) + " – " + PF.fmt(c.end_s) + "</span>" +
-          '<span class="meta">' + Math.round(c.end_s - c.start_s) + "s · " +
-            "score <b>" + c.heuristic_score.toFixed(2) + "</b> · " +
-            "hook " + c.hook_score.toFixed(1) + " · cliff " + c.cliff_score.toFixed(1) +
-            " · " + c.n_beats + " beats</span>" +
-        "</div>" +
-        (first ? '<div class="open">Opens on <em>' + esc(first.text.slice(0, 110)) +
-                 (first.text.length > 110 ? "…" : "") + "</em></div>" : "") +
-        "</div>";
-    }).join("") : '<p class="dnote">No window scored above zero — nothing in the ' +
-        "first 3 seconds of any 20–60s stretch looked like a hook.</p>";
-
-    allRows = { ep: ep, scores: scores, winIds: winIds };
-    renderBeats(ep, scores, winIds, MAX_ROWS);
-
-    out.hidden = false;
-    say(ep.beats.length + " beats · " + cands.length + " candidates · " +
-        ep.warnings.length + " warnings", ep.warnings.length ? "err" : "ok");
+    render();
+    $("d-out").hidden = false;
+    var plural = function (n, w) { return n + " " + w + (n === 1 ? "" : "s"); };
+    say(plural(episodes.length, "episode") + " · " + beats.toLocaleString() +
+        " beats · " + plural(all.length, "candidate") + " · " +
+        plural(warnings.length, "warning"),
+        warnings.length ? "err" : "ok");
   }
 
+  function render() {
+    var c = results.cands.slice(0, shown);
+    $("d-cands").innerHTML = c.map(function (x, i) {
+      var inner = x.beat_ids.map(function (id) { return results.byId[id]; }).filter(Boolean);
+      var first = inner.filter(function (b) { return b.kind !== "CAMERA"; })[0] || inner[0];
+      var rows = inner.map(function (b) {
+        return "<tr><td class='id'>" + esc(b.id) + "</td><td class='m'>" + PF.fmt(b.start_s) +
+          "</td><td class='kind'>" + esc(b.kind === "DIALOGUE" ? (b.speaker || "DIALOGUE") : b.kind) +
+          "</td><td class='txt'>" + esc(b.text.slice(0, 160)) + (b.text.length > 160 ? "…" : "") +
+          "</td></tr>";
+      }).join("");
+      return "<details class='dcand'>" +
+        "<summary>" +
+          "<span class='rk'>" + String(i + 1).padStart(2, "0") + "</span>" +
+          "<span class='tcode'>Ep " + String(x._ep).padStart(2, "0") + "  " +
+            PF.fmt(x.start_s) + "–" + PF.fmt(x.end_s) + "</span>" +
+          "<span class='meta'>" + Math.round(x.end_s - x.start_s) + "s · score <b>" +
+            x.heuristic_score.toFixed(2) + "</b> · hook " + x.hook_score.toFixed(1) +
+            " · cliff " + x.cliff_score.toFixed(1) + "</span>" +
+        "</summary>" +
+        (first ? "<div class='open'>Opens on <em>" + esc(first.text.slice(0, 130)) +
+                 (first.text.length > 130 ? "…" : "") + "</em></div>" : "") +
+        "<div class='dtable-wrap'><table class='dtable'><thead><tr>" +
+          "<th>id</th><th>in</th><th>type</th><th>text</th></tr></thead><tbody>" +
+          rows + "</tbody></table></div>" +
+        "</details>";
+    }).join("");
+    $("d-more").hidden = results.cands.length <= shown;
+    $("d-more").textContent = "Show more (" + (results.cands.length - shown) + " left)";
+  }
+
+  function csv() {
+    var rows = [["rank", "episode", "file", "start", "end", "duration_s",
+                 "score", "hook", "cliff", "beats", "opens_on"]];
+    results.cands.forEach(function (x, i) {
+      var inner = x.beat_ids.map(function (id) { return results.byId[id]; }).filter(Boolean);
+      var first = inner.filter(function (b) { return b.kind !== "CAMERA"; })[0] || inner[0];
+      rows.push([i + 1, x._ep, x._file, PF.fmt(x.start_s), PF.fmt(x.end_s),
+                 (x.end_s - x.start_s).toFixed(2), x.heuristic_score.toFixed(3),
+                 x.hook_score.toFixed(2), x.cliff_score.toFixed(2), x.n_beats,
+                 first ? first.text : ""]);
+    });
+    var body = rows.map(function (r) {
+      return r.map(function (v) {
+        v = String(v);
+        return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
+      }).join(",");
+    }).join("\n");
+    var url = URL.createObjectURL(new Blob([body], { type: "text/csv" }));
+    var a = document.createElement("a");
+    a.href = url; a.download = "promo-candidates.csv";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  }
+
+  // --- events ---------------------------------------------------------------
+  var drop = $("d-drop");
+  drop.addEventListener("click", function () { $("d-file").click(); });
+  drop.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); $("d-file").click(); }
+  });
+  $("d-file").addEventListener("change", function (e) { addFiles(e.target.files); });
+  ["dragenter", "dragover"].forEach(function (ev) {
+    drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add("over"); });
+  });
+  ["dragleave", "drop"].forEach(function (ev) {
+    drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove("over"); });
+  });
+  drop.addEventListener("drop", function (e) {
+    if (e.dataTransfer && e.dataTransfer.files) addFiles(e.dataTransfer.files);
+  });
+
   $("d-run").addEventListener("click", run);
+  $("d-csv").addEventListener("click", csv);
+  $("d-more").addEventListener("click", function () { shown += PAGE; render(); });
+  $("d-paste").addEventListener("click", function () {
+    var box = $("d-pastebox");
+    box.hidden = !box.hidden;
+    if (!box.hidden) $("d-input").focus();
+  });
   $("d-sample").addEventListener("click", function () {
-    input.value = PF.SAMPLE;
+    loaded = [{ name: "sample-episode-01.txt", text: PF.SAMPLE }];
+    listFiles();
+    $("d-out").hidden = true;
     say("Sample loaded — press “Find promos”.");
-    out.hidden = true;
   });
   $("d-clear").addEventListener("click", function () {
-    input.value = ""; out.hidden = true; say("");
-  });
-  $("d-more").addEventListener("click", function () {
-    if (!allRows) return;
-    renderBeats(allRows.ep, allRows.scores, allRows.winIds, 1e9);
-    $("d-more").hidden = true;
+    loaded = []; results = null;
+    $("d-input").value = ""; $("d-file").value = "";
+    $("d-out").hidden = true; listFiles(); say("");
   });
 })();
 
