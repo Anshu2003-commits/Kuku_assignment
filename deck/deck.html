@@ -36,7 +36,7 @@
   .mast .k { font-family: var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--soft); }
   .mast .k b { color: var(--kuku); }
   .mast .who { margin-left: auto; font-weight: 600; }
-  .mast .ln { font-family: var(--mono); color: var(--soft); font-size: 7pt; }
+  .mast .ln { font-family: var(--mono); color: var(--code); font-size: 7pt; text-decoration: underline; text-underline-offset: 1.2pt; text-decoration-thickness: .5pt; }
   .mast .pg { font-family: var(--mono); color: var(--faint); }
 
   h1 { font-family: var(--serif); font-weight: 800; font-size: 25pt; line-height: 1.02; letter-spacing: -.01em; margin: 0; }
@@ -142,8 +142,8 @@
   <div class="mast">
     <span class="k"><b>●</b> Kuku · AI Generalist · Problem 1 — Find the Promos</span>
     <span class="who">Anshu Kumar Sharma · 22322008</span>
-    <span class="ln">kuku-assignment-sigma.vercel.app</span>
-    <span class="ln">github.com/Anshu2003-commits/Kuku_assignment</span>
+    <a class="ln" href="https://kuku-assignment-sigma.vercel.app">kuku-assignment-sigma.vercel.app</a>
+    <a class="ln" href="https://github.com/Anshu2003-commits/Kuku_assignment">github.com/Anshu2003-commits/Kuku_assignment</a>
     <span class="pg">1/2</span>
   </div>
 
@@ -254,8 +254,8 @@ E03.B065  79.0&ndash;81.0s
   <div class="mast">
     <span class="k"><b>●</b> Kuku · AI Generalist · Problem 1 — Find the Promos</span>
     <span class="who">Anshu Kumar Sharma · 22322008</span>
-    <span class="ln">kuku-assignment-sigma.vercel.app</span>
-    <span class="ln">github.com/Anshu2003-commits/Kuku_assignment</span>
+    <a class="ln" href="https://kuku-assignment-sigma.vercel.app">kuku-assignment-sigma.vercel.app</a>
+    <a class="ln" href="https://github.com/Anshu2003-commits/Kuku_assignment">github.com/Anshu2003-commits/Kuku_assignment</a>
     <span class="pg">2/2</span>
   </div>
 
@@ -337,7 +337,7 @@ E03.B065  79.0&ndash;81.0s
     <div style="display:flex;flex-direction:column;gap:3mm">
       <div class="box">
         <div class="sec"><span class="n">K</span> Try it</div>
-        <p class="small"><b>Web:</b> drop in screenplays, pick any model (Gemini, OpenAI, Claude, Groq&hellip;) and paste a key. It runs in the browser; the key never touches a server.</p>
+        <p class="small"><b>Web:</b> on <a href="https://kuku-assignment-sigma.vercel.app/#tab-try" style="color:var(--code)">the live site</a>, drop in screenplays, pick any model (Gemini, OpenAI, Claude, Groq&hellip;) and paste a key. It runs in the browser; the key never touches a server.</p>
         <div class="cmd"><span class="c"># or locally, any provider</span><br>python run.py --input &lt;pack&gt; --out outputs/<br>&nbsp;&nbsp;--provider gemini|openai|anthropic|groq<br><span class="c"># free re-rank, no API calls</span><br>&nbsp;&nbsp;--reuse-judgements outputs/judgements.json</div>
       </div>
     </div>
