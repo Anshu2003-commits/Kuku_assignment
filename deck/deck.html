@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Find the Promos · Anshu Kumar Sharma · 22322008</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  @page { size: 297mm 210mm; margin: 0; }
+  :root {
+    --paper: #F7F4EE; --card: #FFFDF9; --ink: #16181D; --soft: #4C515B; --faint: #7A7F88;
+    --rule: #DCD6CA; --rule2: #C9C2B4;
+    --code: #24508F; --code-bg: #E7EEF8;
+    --ai: #B45309;   --ai-bg: #FBEEDD;
+    --good: #2F7D4F; --good-bg: #E3F1E8;
+    --mid: #B7791F;  --bad: #B42318; --bad-bg: #F8E3E0;
+    --kuku: #EC1C24;
+    --serif: "Fraunces", Georgia, serif;
+    --sans: "IBM Plex Sans", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #888; }
+  body { font-family: var(--sans); color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: 297mm; height: 210mm; background: var(--paper); position: relative; overflow: hidden;
+    padding: 9mm 11mm 8mm; margin: 0 auto 6mm; page-break-after: always; break-after: page;
+    display: flex; flex-direction: column; gap: 4mm;
+  }
+  .page:last-child { page-break-after: auto; break-after: auto; margin-bottom: 0; }
+  @media print { html, body { background: none; } .page { margin: 0; } }
+
+  /* masthead: a thin newspaper-style rule line, not a slide header */
+  .mast { white-space: nowrap; display: flex; align-items: baseline; gap: 4mm; border-bottom: 1.6pt solid var(--ink); padding-bottom: 1.6mm; font-size: 7.6pt; }
+  .mast .k { font-family: var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--soft); }
+  .mast .k b { color: var(--kuku); }
+  .mast .who { margin-left: auto; font-weight: 600; }
+  .mast .ln { font-family: var(--mono); color: var(--soft); font-size: 7pt; }
+  .mast .pg { font-family: var(--mono); color: var(--faint); }
+
+  h1 { font-family: var(--serif); font-weight: 800; font-size: 25pt; line-height: 1.02; letter-spacing: -.01em; margin: 0; }
+  h1 em { font-style: italic; font-weight: 500; color: var(--code); }
+  .deck { font-size: 9.6pt; line-height: 1.42; color: var(--soft); margin: 1.6mm 0 0; max-width: 128mm; }
+  .deck b { color: var(--ink); }
+
+  .sec { font-family: var(--mono); font-size: 6.8pt; letter-spacing: .1em; text-transform: uppercase; color: var(--faint);
+         display: flex; gap: 2mm; align-items: baseline; margin: 0 0 1.6mm; }
+  .sec .n { color: var(--ink); font-weight: 600; }
+  h2 { font-family: var(--serif); font-weight: 700; font-size: 12.5pt; margin: 0 0 1.4mm; line-height: 1.15; }
+  p { margin: 0; }
+  .small { font-size: 7.6pt; line-height: 1.45; color: var(--soft); }
+  .mono { font-family: var(--mono); }
+  .tagc, .taga, .tage { font-family: var(--mono); font-size: 6.2pt; font-weight: 600; letter-spacing: .06em; padding: .2mm 1.2mm; border-radius: 1mm; text-transform: uppercase; white-space: nowrap; }
+  .tagc { color: var(--code); background: var(--code-bg); }
+  .taga { color: var(--ai); background: var(--ai-bg); }
+  .tage { color: var(--good); background: var(--good-bg); }
+
+  .row { display: grid; gap: 6mm; }
+  .box { background: var(--card); border: .6pt solid var(--rule); border-radius: 1.6mm; padding: 3.2mm 3.6mm; }
+  .vr { border-left: .6pt solid var(--rule2); padding-left: 5mm; }
+
+  /* ---------- page 1 ---------- */
+  .p1top { grid-template-columns: 1.15fr 1fr; align-items: center; }
+  .ledger { display: grid; grid-template-columns: auto 1fr auto; gap: .7mm 3mm; font-size: 7.8pt; align-items: baseline; }
+  .ledger .q { font-family: var(--serif); font-weight: 700; font-size: 10pt; white-space: nowrap; }
+  .ledger .how { color: var(--soft); }
+  .ledger hr { grid-column: 1 / -1; border: 0; border-top: .5pt dashed var(--rule2); margin: .4mm 0; }
+
+  .p1mid { grid-template-columns: 1fr 1.25fr; }
+  .funnel { display: flex; flex-direction: column; gap: 1.2mm; margin-top: 1mm; }
+  .fb { display: grid; grid-template-columns: 22mm 1fr; align-items: center; gap: 2.4mm; font-size: 7.6pt; }
+  .fb .num { font-family: var(--serif); font-weight: 800; font-size: 12.5pt; text-align: right; line-height: 1; }
+  .fb .bar { height: 6mm; border-radius: .8mm; display: flex; align-items: center; justify-content: space-between; padding: 0 2.2mm; gap: 2mm; }
+  .fb .bar span:first-child { font-weight: 600; }
+  .fb.c .bar { background: var(--code-bg); color: var(--code); }
+  .fb.a .bar { background: var(--ai-bg); color: var(--ai); }
+  .fb.e .bar { background: var(--good-bg); color: var(--good); }
+  .fb.i .bar { background: #ECE8E0; color: var(--soft); }
+
+  .contract { display: grid; grid-template-columns: 1fr 9mm 1fr 9mm 1fr; align-items: stretch; margin-top: 1mm; }
+  .cstep { border: .6pt solid var(--rule); border-radius: 1.4mm; background: var(--card); padding: 2.2mm 2.4mm; font-size: 7.2pt; line-height: 1.4; }
+  .cstep h3 { font-size: 8pt; margin: 0 0 1mm; display: flex; justify-content: space-between; align-items: center; gap: 1mm; }
+  .cstep pre { font-family: var(--mono); font-size: 6.3pt; line-height: 1.45; background: #F2EFE8; border-radius: 1mm; padding: 1.4mm 1.6mm; margin: 1.2mm 0 0; white-space: pre-wrap; color: var(--ink); }
+  .arrow { display: flex; align-items: center; justify-content: center; color: var(--faint); font-size: 12pt; }
+  .wall { border: 1.2pt dashed var(--ai); }
+  .stats3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; margin-top: 2.4mm; }
+  .st .v { font-family: var(--serif); font-weight: 800; font-size: 16pt; line-height: 1; }
+  .st .l { font-size: 7pt; color: var(--soft); margin-top: .6mm; line-height: 1.35; }
+
+  .p1bot { grid-template-columns: 1.55fr 1fr; margin-top: auto; }
+  .strip svg { display: block; width: 100%; height: auto; }
+  .edl { display: grid; grid-template-columns: auto 1fr; gap: .9mm 3mm; font-size: 7.5pt; line-height: 1.38; margin-top: 1.6mm; }
+  .edl dt { font-family: var(--mono); font-size: 6.4pt; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); padding-top: .3mm; }
+  .edl dd { margin: 0; }
+  .why3 { margin: 0; padding: 0; list-style: none; font-size: 7.8pt; line-height: 1.42; }
+  .why3 li { padding: 1.3mm 0; border-bottom: .5pt dashed var(--rule2); }
+  .why3 li:last-child { border: 0; }
+  .why3 b { font-family: var(--serif); }
+
+  .foot { font-size: 6.6pt; color: var(--faint); font-family: var(--mono); display: flex; justify-content: space-between; border-top: .6pt solid var(--rule2); padding-top: 1.4mm; }
+
+  /* ---------- page 2 ---------- */
+  .p2a { grid-template-columns: 1.2fr 1fr 0.95fr; }
+  .p2b { grid-template-columns: 1.2fr 1fr 0.95fr; }
+  table { border-collapse: collapse; width: 100%; font-size: 7.4pt; }
+  th { font-family: var(--mono); font-size: 6.1pt; letter-spacing: .07em; text-transform: uppercase; color: var(--faint); font-weight: 500; text-align: left; padding: 0 1.4mm 1mm 0; border-bottom: .8pt solid var(--ink); }
+  td { padding: 1.1mm 1.4mm 1.1mm 0; border-bottom: .5pt solid var(--rule); vertical-align: top; }
+  td.n { font-family: var(--mono); text-align: right; }
+  tr:last-child td { border-bottom: 0; }
+  .pct { font-family: var(--serif); font-weight: 700; font-size: 9.5pt; }
+  .dots { display: inline-flex; gap: .55mm; vertical-align: middle; }
+  .dots i { width: 2.1mm; height: 2.1mm; border-radius: 50%; display: inline-block; }
+  .g { background: var(--good); } .m { background: var(--mid); } .b { background: var(--bad); }
+  .legend { font-size: 6.6pt; color: var(--faint); margin-top: 1.2mm; display: flex; gap: 3mm; align-items: center; }
+  .legend i { width: 2mm; height: 2mm; border-radius: 50%; display: inline-block; margin-right: .8mm; vertical-align: middle; }
+  .ba td:nth-child(2) { color: var(--faint); text-decoration: line-through; font-family: var(--mono); }
+  .ba td:nth-child(3) { font-family: var(--mono); font-weight: 600; }
+  .up { color: var(--good); } .down { color: var(--bad); }
+  .list { margin: 0; padding: 0; list-style: none; font-size: 7.4pt; line-height: 1.42; }
+  .list li { display: grid; grid-template-columns: 9mm 1fr; gap: 1.6mm; padding: 1.15mm 0; border-bottom: .5pt dashed var(--rule2); }
+  .list li:last-child { border: 0; }
+  .list .k { font-family: var(--serif); font-weight: 800; font-size: 10pt; line-height: 1.1; }
+  .assume { counter-reset: a; margin: 0; padding: 0; list-style: none; font-size: 7.3pt; line-height: 1.4; columns: 2; column-gap: 4mm; }
+  .assume li { counter-increment: a; break-inside: avoid; padding: 0 0 1.3mm 4.6mm; position: relative; }
+  .assume li::before { content: counter(a); position: absolute; left: 0; font-family: var(--mono); font-size: 6.4pt; color: var(--code); font-weight: 600; top: .2mm; }
+  .speed { display: grid; grid-template-columns: 22mm 1fr auto; gap: 1.2mm 2mm; align-items: center; font-size: 7.2pt; margin-top: 1.4mm; }
+  .speed .tr { height: 2.6mm; background: #ECE8E0; border-radius: .6mm; overflow: hidden; }
+  .speed .tr i { display: block; height: 100%; }
+  .cmd { font-family: var(--mono); font-size: 6.6pt; background: var(--ink); color: #F7F4EE; border-radius: 1.2mm; padding: 2mm 2.4mm; line-height: 1.55; margin-top: 1.4mm; }
+  .cmd .c { color: #9AA3B2; }
+  .misled { margin: 0; padding: 0; list-style: none; font-size: 7.2pt; line-height: 1.4; }
+  .misled li { padding: .5mm 0 .5mm 2.4mm; border-left: 1.4pt solid var(--ai); margin-bottom: 1.1mm; }
+  .misled b { display: inline; }
+  .misled span { color: var(--soft); }
+</style>
+</head>
+<body>
+
+<!-- =============================== PAGE 1 =============================== -->
+<section class="page">
+  <div class="mast">
+    <span class="k"><b>●</b> Kuku · AI Generalist · Problem 1 — Find the Promos</span>
+    <span class="who">Anshu Kumar Sharma · 22322008</span>
+    <span class="ln">kuku-assignment-sigma.vercel.app</span>
+    <span class="ln">github.com/Anshu2003-commits/Kuku_assignment</span>
+    <span class="pg">1/2</span>
+  </div>
+
+  <div class="row p1top">
+    <div>
+      <h1>Read the script,<br><em>don&rsquo;t watch the show.</em></h1>
+      <p class="deck">
+        Today an editor sits through <b>all 50 episodes</b> to pick promo moments, and Kuku adds a show every week.
+        Every episode already arrives as a <b>timestamped screenplay</b>, so I let software read it instead and hand the
+        editor a <b>ranked list of 20 clips</b> with exact in/out times. The editor&rsquo;s job shrinks to approving.
+      </p>
+    </div>
+    <div class="box">
+      <div class="sec"><span class="n">A</span> The brief, turned into checks</div>
+      <div class="ledger">
+        <span class="q">20&ndash;60 s</span><span class="how">Windows are only ever built inside the range; a model edit that leaves it is refused.</span><span class="tagc">code</span>
+        <hr>
+        <span class="q">Hook &le; 3 s</span><span class="how">A candidate needs dramatic evidence in its opening 3 s; the judge then scores it 1&ndash;5.</span><span class="tagc">code</span>
+        <hr>
+        <span class="q">Unresolved cut</span><span class="how">Ends on a beat boundary; the judge rates how open the last note is.</span><span class="taga">ai</span>
+        <hr>
+        <span class="q">Works cold</span><span class="how">The judge sees only the clip plus a 3-beat lead-in, like a stranger would.</span><span class="taga">ai</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row p1mid">
+    <div>
+      <div class="sec"><span class="n">B</span> One run, all 50 episodes</div>
+      <h2>Each step throws most of the work away</h2>
+      <div class="funnel">
+        <div class="fb i"><span class="num">50</span><div class="bar" style="width:100%"><span>episodes in</span><span class="mono">.txt screenplays</span></div></div>
+        <div class="fb c"><span class="num">3,727</span><div class="bar" style="width:100%"><span>timed beats</span><span class="mono">parse · 0 warnings</span></div></div>
+        <div class="fb c"><span class="num">200</span><div class="bar" style="width:72%"><span>candidates</span><span class="mono">rules · 4/ep</span></div></div>
+        <div class="fb a"><span class="num">152</span><div class="bar" style="width:58%"><span>kept by judge</span><span class="mono">Gemini</span></div></div>
+        <div class="fb e"><span class="num">20</span><div class="bar" style="width:36%"><span>on the slate</span><span class="mono">rank</span></div></div>
+      </div>
+      <p class="small" style="margin-top:2.2mm">
+        Rules filter cheaply, so the bill is fixed before a run: <b>200 calls per show</b>. Ranking is plain code
+        with readable weights that an editor can argue with.
+      </p>
+    </div>
+
+    <div class="vr">
+      <div class="sec"><span class="n">C</span> The one design rule</div>
+      <h2>The model never writes a timestamp</h2>
+      <div class="contract">
+        <div class="cstep">
+          <h3>Parser <span class="tagc">code</span></h3>
+          Turns every line, action, camera and sound cue into a beat with an id and exact times.
+          <pre>E03.B064  77.2&ndash;78.9s
+E03.B065  79.0&ndash;81.0s
+&hellip;</pre>
+        </div>
+        <div class="arrow">&rarr;</div>
+        <div class="cstep wall">
+          <h3>Judge <span class="taga">ai</span></h3>
+          Reads the beats as text. May only answer with ids from the clip it was shown.
+          <pre>{"start_beat": "E03.B064",
+ "end_beat":   "E03.B112",
+ "hook_strength": 5, &hellip;}</pre>
+        </div>
+        <div class="arrow">&rarr;</div>
+        <div class="cstep">
+          <h3>Validator <span class="tagc">code</span></h3>
+          Id in the clip? In order? Still 20&ndash;60 s? If not, keep the original window and log a flag.
+          <pre>ids &rarr; times
+01:17.20 &rarr; 02:16.20</pre>
+        </div>
+      </div>
+      <div class="stats3">
+        <div class="st"><div class="v">0</div><div class="l">ways to output a made-up time: times only come from the parser</div></div>
+        <div class="st"><div class="v">118<span style="font-size:9pt;color:var(--faint)">/200</span></div><div class="l">clips the judge tightened, so the id mechanism is really used</div></div>
+        <div class="st"><div class="v">8</div><div class="l">edits that broke 20 s, caught and reverted, all logged in <span class="mono">run_report.json</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row p1bot">
+    <div class="box strip">
+      <div class="sec"><span class="n">D</span> What the editor receives · promo #1 · Ep 03 · 01:17.20&ndash;02:16.20 · 59 s</div>
+      {{STRIP}}
+      <dl class="edl">
+        <dt>Hook</dt><dd>A scarred stranger walks into a chapel and drops a royal guard with one strike.</dd>
+        <dt>Cut on</dt><dd>He kneels to propose to a woman he has just met; the congregation freezes.</dd>
+        <dt>Scores</dt><dd class="mono">hook 5 · cliffhanger 5 · standalone 5 · spoiler 1 &nbsp;&rarr;&nbsp; 4.40</dd>
+      </dl>
+    </div>
+    <div>
+      <div class="sec"><span class="n">E</span> Why I picked this problem</div>
+      <ul class="why3">
+        <li><b>Real input.</b> It was the only option with an actual data pack, so results can be checked, not imagined.</li>
+        <li><b>Recurring pain.</b> A new show every week means the saving compounds; it is not a one-off.</li>
+        <li><b>A testable definition.</b> The brief says what a promo is (length, hook, open ending), so I could score against it.</li>
+      </ul>
+      <p class="small" style="margin-top:1.4mm">Output: <span class="mono">promos.md · promos.csv · promos.json</span>, plus every rejected clip with its reason.</p>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Run: all 50 episodes, gemini-3.1-flash-lite, 980 s. Every figure is read from outputs/ and run_report.json.</span>
+    <span>Live demo runs in the browser · bring any model + key</span>
+  </div>
+</section>
+
+<!-- =============================== PAGE 2 =============================== -->
+<section class="page">
+  <div class="mast">
+    <span class="k"><b>●</b> Kuku · AI Generalist · Problem 1 — Find the Promos</span>
+    <span class="who">Anshu Kumar Sharma · 22322008</span>
+    <span class="ln">kuku-assignment-sigma.vercel.app</span>
+    <span class="ln">github.com/Anshu2003-commits/Kuku_assignment</span>
+    <span class="pg">2/2</span>
+  </div>
+
+  <div>
+    <h1 style="font-size:21pt">Is it any good? <em>I checked 30 clips by hand.</em></h1>
+    <p class="deck" style="max-width:none">I judged each clip from the beats in the screenplay, never from the model&rsquo;s own summary of it. Then I fixed what the labels exposed and measured again.</p>
+  </div>
+
+  <div class="row p2a">
+    <div class="box">
+      <div class="sec"><span class="n">F</span> Hand labels against the brief</div>
+      <table>
+        <tr><th>Slice</th><th>n</th><th>Clips</th><th>Reading</th></tr>
+        <tr><td>Top 10</td><td class="n">10</td>
+          <td><span class="dots"><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="b"></i></span></td>
+          <td><span class="pct">60%</span> clean · 90% usable</td></tr>
+        <tr><td>Whole slate</td><td class="n">18</td>
+          <td><span class="dots"><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="b"></i><i class="b"></i></span></td>
+          <td><span class="pct">44%</span> clean · 89% usable</td></tr>
+        <tr><td>Rejected</td><td class="n">12</td>
+          <td><span class="dots"><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i></span></td>
+          <td><span class="pct">67%</span> rightly dropped</td></tr>
+      </table>
+      <div class="legend"><span><i class="g"></i>post it</span><span><i class="m" style="background:var(--mid)"></i>borderline</span><span><i class="b" style="background:var(--bad)"></i>bad</span>
+        <span style="margin-left:auto" class="mono">eval/eval_report.md</span></div>
+    </div>
+
+    <div class="box">
+      <div class="sec"><span class="n">G</span> Fix &amp; re-measure</div>
+      <p class="small">The labels exposed three bugs in the rules: start-of-scene position counted as a hook, and <span class="mono">crack</span> / <span class="mono">fire</span> matched a cosy &ldquo;crackling hearth fire&rdquo;.</p>
+      <table class="ba" style="margin-top:1.4mm">
+        <tr><th>Measure</th><th>before</th><th>after</th></tr>
+        <tr><td>Top-10 clean</td><td>30%</td><td class="up">60%</td></tr>
+        <tr><td>Slate usable</td><td>65%</td><td class="up">89%</td></tr>
+        <tr><td>Rejects right</td><td>77%</td><td class="down">67%</td></tr>
+      </table>
+      <p class="small" style="margin-top:1.2mm">The cost: a stricter gate means the judge&rsquo;s rejects are closer calls. I report it rather than hide it.</p>
+    </div>
+
+    <div class="box">
+      <div class="sec"><span class="n">H</span> Mechanical checks</div>
+      <div class="stats3" style="grid-template-columns:1fr 1fr; margin-top:0; gap:2.4mm 3mm">
+        <div class="st"><div class="v">100%</div><div class="l">timecodes land on real beat boundaries</div></div>
+        <div class="st"><div class="v">100%</div><div class="l">promos inside 20&ndash;60 s</div></div>
+        <div class="st"><div class="v">200<span style="font-size:9pt;color:var(--faint)">/200</span></div><div class="l">candidates judged, 0 API failures</div></div>
+        <div class="st"><div class="v">0</div><div class="l">parse warnings across 3,727 beats</div></div>
+      </div>
+      <p class="small" style="margin-top:1.6mm"><span class="mono">eval/verify_outputs.py</span> re-parses the scripts on its own and checks every output against them.</p>
+    </div>
+  </div>
+
+  <div class="row p2b">
+    <div class="box">
+      <div class="sec"><span class="n">I</span> Where it still picks badly</div>
+      <ul class="list">
+        <li><span class="k" style="color:var(--bad)">6/30</span><span><b>Soft endings.</b> The judge gives a 4/5 cliffhanger to clips that end on a resolution, e.g. a flirt. Absolute 1&ndash;5 scores are the weak spot.</span></li>
+        <li><span class="k" style="color:var(--mid)">4/12</span><span><b>Too strict at the gate.</b> Some rejects were postable, one ending on the single word &ldquo;Arsenic.&rdquo;</span></li>
+        <li><span class="k">198</span><span><b>Spoiler score barely varies.</b> 198 of 200 clips got 1 or 2, so it hardly moves the ranking.</span></li>
+        <li><span class="k">&mdash;</span><span><b>Reads words, not pictures.</b> A striking silent shot is underrated. Any text-only method shares this limit.</span></li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <div class="sec"><span class="n">J</span> Speed, cost, scale</div>
+      <p class="small"><b>Same scores, 100&times; the wait.</b> A reasoning model and Flash Lite rated the same clip identically.</p>
+      <div class="speed">
+        <span>reasoning model</span><span class="tr"><i style="width:100%;background:var(--bad)"></i></span><span class="mono">~245 s</span>
+        <span>3.1 Flash Lite</span><span class="tr"><i style="width:1.2%;min-width:1mm;background:var(--good)"></i></span><span class="mono">~2.5 s</span>
+      </div>
+      <table style="margin-top:2mm">
+        <tr><td>Calls per show</td><td class="n">200</td></tr>
+        <tr><td>Tokens per show</td><td class="n">~230k</td></tr>
+        <tr><td>Free tier (15/min, 500/day)</td><td class="n">~16 min</td></tr>
+        <tr><td>Paid tier</td><td class="n">&lt; 1 min</td></tr>
+      </table>
+      <p class="small" style="margin-top:1.2mm">Cost grows with episode count, not episode length, so the budget is known before a run.</p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:3mm">
+      <div class="box">
+        <div class="sec"><span class="n">K</span> Try it</div>
+        <p class="small"><b>Web:</b> drop in screenplays, pick any model (Gemini, OpenAI, Claude, Groq&hellip;) and paste a key. It runs in the browser; the key never touches a server.</p>
+        <div class="cmd"><span class="c"># or locally, any provider</span><br>python run.py --input &lt;pack&gt; --out outputs/<br>&nbsp;&nbsp;--provider gemini|openai|anthropic|groq<br><span class="c"># free re-rank, no API calls</span><br>&nbsp;&nbsp;--reuse-judgements outputs/judgements.json</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="grid-template-columns:1.2fr 1.3fr 0.95fr; margin-top:auto">
+    <div>
+      <div class="sec"><span class="n">L</span> Gaps in the brief I had to fill</div>
+      <ol class="assume">
+        <li>Script times match the cut video 1:1.</li>
+        <li>20 and 60 s are both allowed.</li>
+        <li>Clips start and end on whole beats.</li>
+        <li>&ldquo;Makes sense alone&rdquo; is judged on the clip only.</li>
+        <li>Joining two segments is allowed; one stretch preferred.</li>
+        <li>Spoiler risk grows with episode number.</li>
+      </ol>
+    </div>
+    <div class="vr">
+      <div class="sec"><span class="n">M</span> Bugs my AI assistants introduced</div>
+      <ul class="misled">
+        <li><b>Retired model id &rarr; 404.</b> <span>Now I list models from the API, not from memory.</span></li>
+        <li><b>&ldquo;Beats are always in time order.&rdquo;</b> <span>False in 8 places; a parser test caught it.</span></li>
+        <li><b>Hearth fire read as violence.</b> <span>Hand labels caught it; fixed in G.</span></li>
+        <li><b>A run hung for 2 hours.</b> <span>The SDK has no default timeout; I added one.</span></li>
+      </ul>
+    </div>
+    <div class="vr">
+      <div class="sec"><span class="n">N</span> What I&rsquo;d build next</div>
+      <ul class="why3" style="font-size:7.3pt">
+        <li><b>Pairwise judging</b> instead of lone 1&ndash;5 scores; it targets both failure modes.</li>
+        <li><b>Learned weights</b> from real watch-through data.</li>
+        <li><b>Keyframes</b> for top picks, to catch silent moments.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Sources: outputs/ · run_report.json · eval/test_parse.py · eval/verify_outputs.py · eval/before_after.md · eval/eval_report.md</span>
+    <span>Built with Claude Code · judged by Gemini 3.1 Flash Lite</span>
+  </div>
+</section>
+</body>
+</html>

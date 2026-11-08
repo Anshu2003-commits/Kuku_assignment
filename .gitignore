@@ -26,3 +26,6 @@ outputs_test/
 
 # For recording the walkthrough only - not part of the submission.
 VIDEO_SCRIPT.md
+
+# Deck build artefact
+deck/deck.built.html
