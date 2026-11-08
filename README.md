@@ -4,8 +4,8 @@ Reads a folder of microdrama screenplays and returns a ranked shortlist of
 20–60 second promo clips, each with exact start/end timecodes, the hook, the
 cliffhanger, and one line on why it works.
 
-**Read the solution doc:** [2-page deck (PDF)](promo-finder-solution-anshu.pdf)
-· [web version](index.html) — open `index.html` locally, or deploy it (see below)
+**Live:** <https://kuku-assignment-sigma.vercel.app>
+· **[2-page deck (PDF)](promo-finder-solution-anshu.pdf)**
 
 *Anshu Kumar Sharma · Enrolment 22322008 · Problem 1*
 
@@ -59,7 +59,8 @@ streamlit run app.py
 `index.html` is a single self-contained page — the whole solution doc plus
 the real top-10 promos from the run. Open it directly in a browser, or
 deploy it: `vercel.json` configures a static deploy and `.vercelignore`
-keeps the Python source out of the build.
+keeps the Python source out of the build. Deployed at
+<https://kuku-assignment-sigma.vercel.app>.
 
 ## Outputs
 
