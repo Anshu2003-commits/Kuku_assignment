@@ -1,0 +1,10 @@
+# This deploy only serves the static page and the doc. The Python source
+# lives in the repo for review but must not be built - requirements.txt at
+# the root would otherwise make Vercel try to build a Python project.
+promo_finder/
+eval/
+run.py
+app.py
+requirements.txt
+streamlit.log
+__pycache__/
