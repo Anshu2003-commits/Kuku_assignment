@@ -1,0 +1,182 @@
+EPISODE NUMBER: Episode 1
+EPISODE LOGLINE: A junior accountant is fired in front of the whole floor, then discovers the signature on the forged invoice is her own boss's.
+CONTINUITY NOTES: Synthetic sample written for this demo. Not from any real show.
+
+--- SCRIPT START ---
+
+SCENE 01
+Scene heading: INT. OPEN-PLAN OFFICE - DAY
+Scene start: 00:00.00
+Scene end: 01:48.00
+
+Actions and dialogue:
+
+**CAMERA:**
+Start: (00:00.00) | End: (00:02.40)
+Hard cut to a wide shot of a silent open-plan office, every head turned toward one desk.
+
+**ACTION:**
+Start: (00:00.60) | End: (00:03.20)
+A thick folder slams onto the desk, scattering pens across the floor.
+
+**SOUND FX:**
+Start: (00:00.80) | End: (00:02.00)
+A heavy slap of paper on laminate, then dead silence.
+
+**MARGARET (Cold, Commanding):**
+Start: (00:03.40) | End: (00:05.80)
+"Pack your things. Security is already downstairs."
+
+**CAMERA:**
+Start: (00:05.80) | End: (00:08.60)
+Close-up on PRIYA, frozen mid-typing, her face draining of colour.
+
+**PRIYA (Shocked, Breathless):**
+Start: (00:06.20) | End: (00:08.40)
+"On what grounds?"
+
+**MARGARET (Venomous):**
+Start: (00:08.80) | End: (00:12.10)
+"Forty thousand pounds. Invoiced to a company that does not exist."
+
+**CAMERA:**
+Start: (00:12.10) | End: (00:15.00)
+Medium shot of colleagues half-standing at their desks, phones already out.
+
+**PRIYA (Outraged, Accusing):**
+Start: (00:12.60) | End: (00:15.00)
+"I never signed that."
+
+**MARGARET (Mocking):**
+Start: (00:15.30) | End: (00:18.20)
+"Then explain why your name is on the bottom of it."
+
+**ACTION:**
+Start: (00:18.40) | End: (00:21.00)
+Margaret drops a single printed page onto the keyboard in front of Priya.
+
+**CAMERA:**
+Start: (00:21.00) | End: (00:24.50)
+Insert close-up on the invoice, a signature scrawled across the authorisation line.
+
+**PRIYA (Trembling):**
+Start: (00:22.00) | End: (00:24.30)
+"That is not my handwriting."
+
+**MARGARET (Dismissive):**
+Start: (00:24.70) | End: (00:27.00)
+"Tell it to the tribunal."
+
+**ACTION:**
+Start: (00:27.20) | End: (00:30.80)
+Priya gathers the page, her hands shaking, and walks the length of the floor in silence.
+
+**CAMERA:**
+Start: (00:27.20) | End: (00:31.40)
+Slow tracking shot following Priya past rows of colleagues who will not meet her eyes.
+
+**SOUND FX:**
+Start: (00:30.00) | End: (00:33.00)
+A low string drone rises underneath the hum of the air conditioning.
+
+**CAMERA:**
+Start: (00:33.00) | End: (00:36.40)
+Close-up on Priya in the lift, alone, studying the invoice under flickering light.
+
+**ACTION:**
+Start: (00:36.60) | End: (00:40.20)
+She tilts the page toward the light. Beneath her forged name, a second signature shows faintly through from the reverse.
+
+**PRIYA (Whispering):**
+Start: (00:40.40) | End: (00:42.60)
+"Who countersigned this?"
+
+**CAMERA:**
+Start: (00:42.60) | End: (00:46.00)
+Extreme close-up pushing in on the faint ink: the letter M, then a long confident loop.
+
+**ACTION:**
+Start: (00:46.20) | End: (00:49.80)
+Priya's expression shifts from panic into something colder and far more dangerous.
+
+**SOUND FX:**
+Start: (00:48.00) | End: (00:51.00)
+The drone swells to an abrupt cliffhanger cut as the lift doors open.
+
+**CAMERA:**
+Start: (00:51.00) | End: (00:54.20)
+Wide shot of the lobby. Margaret stands at reception, laughing with a colleague, unaware.
+
+**PRIYA (V.O.) (Quiet, Deadly):**
+Start: (00:54.40) | End: (00:57.60)
+"She signed it herself."
+
+**ACTION:**
+Start: (00:57.80) | End: (01:01.40)
+Priya folds the invoice carefully into her coat pocket and walks straight toward Margaret.
+
+**CAMERA:**
+Start: (01:01.40) | End: (01:05.00)
+Low-angle tracking shot behind Priya, Margaret growing larger in frame.
+
+**MARGARET (Startled):**
+Start: (01:05.20) | End: (01:07.40)
+"I thought security escorted you out."
+
+**PRIYA (Steely, Fearless):**
+Start: (01:07.60) | End: (01:10.80)
+"They did. I came back."
+
+**ACTION:**
+Start: (01:11.00) | End: (01:14.20)
+Priya places the invoice face-up on the reception desk between them.
+
+**CAMERA:**
+Start: (01:14.20) | End: (01:17.60)
+Close-up on Margaret's face as the colour drains out of it.
+
+**PRIYA (Accusing):**
+Start: (01:17.80) | End: (01:21.40)
+"Turn it over. Hold it up to the light."
+
+**MARGARET (Horrified):**
+Start: (01:21.60) | End: (01:23.40)
+"Where did you get that?"
+
+**CAMERA:**
+Start: (01:23.60) | End: (01:27.00)
+Two-shot. Margaret reaches for the page. Priya slides it out of reach.
+
+**PRIYA (Cold):**
+Start: (01:27.20) | End: (01:30.60)
+"The auditors open at nine tomorrow."
+
+**ACTION:**
+Start: (01:30.80) | End: (01:34.40)
+Margaret grabs Priya's wrist hard enough to make her gasp.
+
+**SOUND FX:**
+Start: (01:31.00) | End: (01:32.60)
+A sharp, stunned gasp.
+
+**MARGARET (Desperate):**
+Start: (01:34.60) | End: (01:37.80)
+"Name your price. Anything."
+
+**CAMERA:**
+Start: (01:37.80) | End: (01:41.20)
+Extreme close-up on Priya's eyes, perfectly steady.
+
+**PRIYA (Quiet, Final):**
+Start: (01:41.40) | End: (01:44.60)
+"I want your job."
+
+**SOUND FX:**
+Start: (01:44.00) | End: (01:47.00)
+An ominous low brass drone swells to a thunderous cliffhanger sting.
+
+**CAMERA:**
+Start: (01:47.00) | End: (01:48.00)
+Cut to black.
+
+--- SCRIPT END ---
