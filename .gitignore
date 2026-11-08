@@ -17,9 +17,8 @@ I Married a Broken Soldier*/
 scripts/
 
 # Build artefacts.
-# SOLUTION.html is the print view used to export SOLUTION.pdf.
-# The PDF itself IS a deliverable, so it is committed.
-SOLUTION.html
+# SOLUTION.html is the print source for SOLUTION.pdf and carries its fonts
+# embedded, so it is tracked: open it and Ctrl+P to regenerate the deck.
 streamlit.log
 run.log
 st.log
