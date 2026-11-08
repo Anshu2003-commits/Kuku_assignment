@@ -778,6 +778,43 @@
   }
   .more:hover { border-color: var(--red); }
   .hero { padding-bottom: .5rem; }
+
+  /* ---- AI judge (bring your own key) ---------------------------------- */
+  .aicfg { border: 1px solid var(--line-firm); border-radius: var(--r); background: var(--surface); margin-bottom: .8rem; }
+  .aicfg > summary {
+    list-style: none; cursor: pointer; display: flex; align-items: center; gap: .6rem;
+    flex-wrap: wrap; padding: .65rem .9rem;
+  }
+  .aicfg > summary::-webkit-details-marker { display: none; }
+  .aicfg > summary::after { content: "+"; margin-left: auto; font-weight: 800; color: var(--ink-faint); }
+  .aicfg[open] > summary::after { content: "\2212"; }
+  .aitag {
+    font-family: var(--mono); font-size: .66rem; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; color: #fff; background: var(--red-lit); padding: .15rem .45rem; border-radius: 4px;
+  }
+  .aisum { font-weight: 700; color: var(--ink); }
+  .aistate { font-family: var(--mono); font-size: .7rem; color: var(--ink-faint); }
+  .aistate.on { color: var(--good); }
+  .aigrid { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem .8rem; padding: 0 .9rem; }
+  .aigrid label { display: flex; flex-direction: column; gap: .25rem; font-size: .74rem; font-weight: 600; color: var(--ink-soft); min-width: 0; }
+  .aigrid label.wide { grid-column: 1 / -1; }
+  .aigrid label[hidden] { display: none; }
+  .aigrid label.chk { flex-direction: row; align-items: center; gap: .4rem; align-self: end; padding-bottom: .45rem; }
+  .aigrid input:not([type=checkbox]), .aigrid select {
+    font: inherit; font-size: .85rem; font-weight: 400; color: var(--ink); background: var(--ground);
+    border: 1px solid var(--line-firm); border-radius: 6px; padding: .45rem .55rem; width: 100%; box-sizing: border-box;
+  }
+  .aigrid input:focus, .aigrid select:focus { outline: 2px solid var(--red-lit); outline-offset: 1px; }
+  .ainote { font-size: .76rem; color: var(--ink-faint); margin: .6rem .9rem .8rem; }
+  @media (max-width: 560px) { .aigrid { grid-template-columns: 1fr; } }
+  .aibox { border: 1px dashed var(--line-firm); border-radius: var(--r); padding: .7rem .8rem; margin: .4rem 0 1rem; }
+  .aibox .dhrow > span { display: flex; gap: .4rem; flex-wrap: wrap; }
+  .jcard dl { display: grid; grid-template-columns: auto 1fr; gap: .25rem .7rem; margin: .5rem 0 0; font-size: .84rem; }
+  .jcard dt { font-family: var(--mono); font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; color: var(--red); padding-top: .2rem; }
+  .jcard dd { margin: 0; color: var(--ink); }
+  .jcard .flag { font-family: var(--mono); font-size: .64rem; color: var(--warn); border: 1px solid currentColor; border-radius: 4px; padding: 0 .3rem; }
+  .jcard.rej { opacity: .6; }
+  .aierr { font-family: var(--mono); font-size: .74rem; color: var(--bad); margin-top: .4rem; white-space: pre-wrap; }
 </style>
 <style>
   html { color-scheme: light dark; }
@@ -865,11 +902,50 @@
       Drop in a whole show &mdash; one file or fifty &mdash; and the real
       pipeline runs in your browser. The parser pulls out every beat with its
       exact timestamp, the heuristics score each one, and 20&ndash;60s windows
-      are generated and de-duplicated across every episode. Nothing is
-      uploaded anywhere; it all runs on your machine.
+      are generated and de-duplicated across every episode. Add your own model
+      and API key to run the AI judge on top, straight from your browser.
     </p>
 
     <div class="demo">
+      <details class="aicfg" id="ai-cfg">
+        <summary>
+          <span class="aitag">AI judge</span>
+          <span class="aisum">Bring your own model &amp; API key</span>
+          <span class="aistate" id="ai-state">off &middot; heuristics only</span>
+        </summary>
+        <div class="aigrid">
+          <label>Provider
+            <select id="ai-provider">
+              <option value="gemini">Google Gemini</option>
+              <option value="openai">OpenAI</option>
+              <option value="anthropic">Anthropic (Claude)</option>
+              <option value="groq">Groq</option>
+              <option value="openrouter">OpenRouter</option>
+              <option value="custom">Custom (OpenAI-compatible URL)</option>
+            </select>
+          </label>
+          <label>Model
+            <input id="ai-model" list="ai-models" autocomplete="off" spellcheck="false" placeholder="any model id">
+            <datalist id="ai-models"></datalist>
+          </label>
+          <label class="wide" id="ai-baserow" hidden>Base URL
+            <input id="ai-base" placeholder="https://your-host/v1" spellcheck="false" autocomplete="off">
+          </label>
+          <label class="wide">API key
+            <input id="ai-key" type="password" placeholder="Paste your key" autocomplete="off" spellcheck="false">
+          </label>
+          <label>Clips to judge
+            <input id="ai-n" type="number" min="1" max="60" value="10">
+          </label>
+          <label class="chk"><input id="ai-remember" type="checkbox"> Remember key on this device</label>
+        </div>
+        <p class="ainote">
+          Your key goes straight from this browser to the provider you pick. This site has no
+          server and never sees it. It is kept only for this tab unless you tick
+          &ldquo;remember&rdquo;. The model picks beat ids, never timestamps; code maps ids back
+          to times, exactly like the Python pipeline.
+        </p>
+      </details>
       <div id="d-drop" class="ddrop" tabindex="0" role="button"
            aria-label="Choose screenplay files, or drop them here">
         <input id="d-file" type="file" accept=".txt,.text" multiple hidden>
@@ -908,15 +984,28 @@ Hard cut to a wide shot of a silent office."></textarea>
 
         <div id="d-warnlist" class="dwarn" hidden></div>
 
+        <div id="ai-box" class="aibox">
+          <div class="dhrow">
+            <h3 class="dh">AI-judged promos</h3>
+            <span>
+              <button id="ai-run" class="btn primary">Judge with AI &rarr;</button>
+              <button id="ai-csv" class="btn ghost" hidden>Download CSV</button>
+            </span>
+          </div>
+          <p class="dnote" id="ai-hint">
+            Add a model and API key under <b>AI judge</b> above, then judge the top candidates.
+            The model tightens each window, writes the hook, cliffhanger and why, and scores it.
+          </p>
+          <div id="ai-out" class="dcands"></div>
+        </div>
+
         <div class="dhrow">
-          <h3 class="dh">Ranked candidates</h3>
+          <h3 class="dh">Heuristic candidates</h3>
           <button id="d-csv" class="btn ghost">Download CSV</button>
         </div>
         <p class="dnote">
-          Ranked by the heuristic score, de-duplicated across episodes. In the
-          full pipeline these go to the LLM, which tightens each window and
-          writes the hook and cliffhanger lines &mdash; that step needs an API
-          key and does not run in a browser. Click a row to see its beats.
+          Ranked by the heuristic score, de-duplicated across episodes. These are what
+          the AI judge receives. Click a row to see its beats.
         </p>
         <div id="d-cands" class="dcands"></div>
         <button id="d-more" class="btn ghost" hidden>Show more</button>
@@ -1731,6 +1820,7 @@ function generateCandidates(ep, topN = 4) {
 
     all.sort(function (a, b) { return b.heuristic_score - a.heuristic_score; });
     results = { episodes: episodes, cands: all, byId: byId };
+    window.PF_RESULTS = results;
     shown = PAGE;
 
     var beats = episodes.reduce(function (n, e) { return n + e.beats.length; }, 0);
@@ -1884,6 +1974,298 @@ function generateCandidates(ep, topN = 4) {
       btn.textContent = c ? "Show all " + promos.children.length + " promos" : "Show fewer";
     });
   }
+})();
+</script>
+<script>
+/* AI judge in the browser: bring your own model and key.
+   Mirrors promo_finder/judge.py: the model picks beat ids, code maps ids to times. */
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var PROVIDERS = {
+    gemini:     { models: ["gemini-3.1-flash-lite", "gemini-3.5-flash", "gemini-3.1-pro"], url: "https://generativelanguage.googleapis.com/v1beta" },
+    openai:     { models: ["gpt-4o-mini", "gpt-4.1-mini", "gpt-4o"], url: "https://api.openai.com/v1" },
+    anthropic:  { models: ["claude-sonnet-5-5", "claude-haiku-5-5", "claude-opus-5-5"], url: "https://api.anthropic.com/v1" },
+    groq:       { models: ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"], url: "https://api.groq.com/openai/v1" },
+    openrouter: { models: ["google/gemini-3.1-flash-lite", "openai/gpt-4o-mini", "anthropic/claude-sonnet-5-5"], url: "https://openrouter.ai/api/v1" },
+    custom:     { models: [], url: "" }
+  };
+  var MIN_S = 20, MAX_S = 60;
+  var W = { hook: .35, cliff: .30, standalone: .25, spoiler: -.10 };
+
+  var SYSTEM = "You are a social-media promo editor for vertical microdramas (ReelShort / DramaBox style). You judge whether a proposed clip would stop a stranger mid-scroll on TikTok, Instagram Reels or YouTube Shorts.\n\nA good promo:\n- HOOK: something in the FIRST 3 SECONDS that makes a scrolling viewer stop - a slap, a reveal, a shocking line. Beautiful scenery or slow build is not a hook.\n- CLIFFHANGER: it cuts at an unresolved moment, so the viewer must know what happens next. Do not end on a resolution or a calm beat.\n- STANDALONE: it makes sense to someone who has never seen the show. If the clip depends on knowing who people are, it is weak no matter how dramatic.\n\nYou are strict. Most candidates are mediocre; say so. A show has at most a handful of genuinely strong promos.\n\nReturn ONLY a JSON object, no prose, no code fences.";
+
+  function sget(store, k) { try { return window[store].getItem(k); } catch (e) { return null; } }
+  function sset(store, k, v) { try { if (v == null) window[store].removeItem(k); else window[store].setItem(k, v); } catch (e) {} }
+  var KEY = "pf.ai.";
+
+  function fillModels() {
+    var p = $("ai-provider").value, cfg = PROVIDERS[p];
+    $("ai-models").innerHTML = cfg.models.map(function (m) { return "<option value='" + m + "'>"; }).join("");
+    $("ai-baserow").hidden = p !== "custom";
+    $("ai-model").value = sget("localStorage", KEY + "model." + p) || cfg.models[0] || "";
+    $("ai-key").value = sget("sessionStorage", KEY + "key." + p) || sget("localStorage", KEY + "key." + p) || "";
+    $("ai-remember").checked = !!sget("localStorage", KEY + "key." + p);
+    state();
+  }
+  function save() {
+    var p = $("ai-provider").value, k = $("ai-key").value.trim();
+    sset("localStorage", KEY + "provider", p);
+    sset("localStorage", KEY + "model." + p, $("ai-model").value.trim() || null);
+    sset("localStorage", KEY + "base", $("ai-base").value.trim() || null);
+    sset("sessionStorage", KEY + "key." + p, k || null);
+    sset("localStorage", KEY + "key." + p, ($("ai-remember").checked && k) ? k : null);
+    state();
+  }
+  function ready() {
+    return !!($("ai-key").value.trim() && $("ai-model").value.trim() &&
+      ($("ai-provider").value !== "custom" || $("ai-base").value.trim()));
+  }
+  function state() {
+    var on = ready(), el = $("ai-state");
+    el.textContent = on ? "on · " + $("ai-model").value.trim() : "off · heuristics only";
+    el.className = "aistate" + (on ? " on" : "");
+  }
+
+  // ---- prompt: same template as promo_finder/judge.py ----
+  function fmtTs(sec) {
+    var m = Math.floor(sec / 60), s = sec - m * 60;
+    return String(m).padStart(2, "0") + ":" + s.toFixed(2).padStart(5, "0");
+  }
+  function renderBeat(b) {
+    var span = "(" + fmtTs(b.start_s) + "-" + fmtTs(b.end_s) + ")";
+    if (b.kind === "DIALOGUE") {
+      var emo = b.emotions && b.emotions.length ? " (" + b.emotions.join(", ") + ")" : "";
+      return "[" + b.id + "] " + span + " " + b.speaker + emo + ": " + b.text;
+    }
+    return "[" + b.id + "] " + span + " " + b.kind + ": " + b.text;
+  }
+  function buildPrompt(c, ep) {
+    var clip = c.beat_ids.map(function (id) { return ep._byId[id]; }).filter(Boolean);
+    var first = clip.length ? clip[0].index : 0;
+    var ctx = ep.beats.filter(function (b) { return b.index < first; }).slice(-3);
+    return "SHOW: Uploaded show\n" +
+      "EPISODE " + ep.number + " LOGLINE: " + (ep.logline || "(none given)") + "\n\n" +
+      "LEAD-IN (context only - NOT part of the clip, do not select these ids):\n" +
+      (ctx.map(renderBeat).join("\n") || "(start of episode)") + "\n\n" +
+      "PROPOSED CLIP (" + (c.end_s - c.start_s).toFixed(1) + "s, " + clip.length + " beats):\n" +
+      clip.map(renderBeat).join("\n") + "\n\n" +
+      "Judge this clip. You may TIGHTEN the clip by choosing a later start_beat or an\n" +
+      "earlier end_beat from the PROPOSED CLIP ids above, but the result must stay\n" +
+      "between " + MIN_S + " and " + MAX_S + " seconds. Never invent a beat id.\n\n" +
+      "Return exactly this JSON shape:\n{\n" +
+      '  "keep": true or false,\n' +
+      '  "reject_reason": null or a short string,\n' +
+      '  "start_beat": "<beat id from the clip>",\n' +
+      '  "end_beat": "<beat id from the clip>",\n' +
+      '  "hook": "one sentence - what happens in the first 3 seconds",\n' +
+      '  "cliffhanger": "one sentence - the unresolved note it cuts on",\n' +
+      '  "why_it_works": "one sentence - why a stranger keeps watching",\n' +
+      '  "hook_strength": 1-5,\n  "cliffhanger_strength": 1-5,\n  "standalone": 1-5,\n  "spoiler_risk": 1-5\n}';
+  }
+
+  // ---- provider calls ----
+  function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+  async function http(url, opts) {
+    for (var attempt = 0; attempt < 4; attempt++) {
+      var res;
+      try { res = await fetch(url, opts); }
+      catch (e) { throw new Error("Network/CORS error calling " + new URL(url).host + ". Check the URL, or that this provider allows browser calls."); }
+      if (res.status === 429 || res.status >= 500) {
+        var ra = parseFloat(res.headers.get("retry-after")) || Math.pow(2, attempt + 1);
+        await sleep(Math.min(30, ra) * 1000); continue;
+      }
+      var body = await res.text(), data = null;
+      try { data = JSON.parse(body); } catch (e) {}
+      if (!res.ok) {
+        var msg = (data && data.error && (data.error.message || data.error)) || body.slice(0, 300);
+        var err = new Error(res.status + ": " + (typeof msg === "string" ? msg : JSON.stringify(msg)));
+        err.status = res.status; throw err;
+      }
+      return data;
+    }
+    throw new Error("Rate limited by the provider. Try fewer clips or wait a minute.");
+  }
+  async function complete(cfg, user) {
+    var p = cfg.provider;
+    if (p === "gemini") {
+      var d = await http(PROVIDERS.gemini.url + "/models/" + encodeURIComponent(cfg.model) + ":generateContent", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-goog-api-key": cfg.key },
+        body: JSON.stringify({
+          systemInstruction: { parts: [{ text: SYSTEM }] },
+          contents: [{ role: "user", parts: [{ text: user }] }],
+          generationConfig: { temperature: 0.2, responseMimeType: "application/json" }
+        })
+      });
+      var parts = (((d.candidates || [])[0] || {}).content || {}).parts || [];
+      return parts.map(function (x) { return x.text || ""; }).join("");
+    }
+    if (p === "anthropic") {
+      var a = await http(PROVIDERS.anthropic.url + "/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-api-key": cfg.key,
+                   "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-access": "true" },
+        body: JSON.stringify({ model: cfg.model, max_tokens: 1024, system: SYSTEM,
+                               messages: [{ role: "user", content: user }] })
+      });
+      return (a.content || []).map(function (x) { return x.text || ""; }).join("");
+    }
+    // OpenAI-compatible: openai, groq, openrouter, custom
+    var base = (p === "custom" ? cfg.base : PROVIDERS[p].url).replace(/\/+$/, "");
+    var payload = { model: cfg.model, temperature: 0.2,
+                    messages: [{ role: "system", content: SYSTEM }, { role: "user", content: user }] };
+    if (p === "openai" || p === "groq") payload.response_format = { type: "json_object" };
+    var send = function () {
+      return http(base + "/chat/completions", { method: "POST",
+        headers: { "Content-Type": "application/json", "Authorization": "Bearer " + cfg.key },
+        body: JSON.stringify(payload) });
+    };
+    var o;
+    try { o = await send(); }
+    catch (e) {
+      // Some models reject temperature or JSON mode: retry once without them.
+      if (e.status !== 400) throw e;
+      delete payload.temperature; delete payload.response_format;
+      o = await send();
+    }
+    return ((((o.choices || [])[0] || {}).message) || {}).content || "";
+  }
+  function extractJson(text) {
+    text = String(text).replace(/```(?:json)?/gi, "");
+    var a = text.indexOf("{"), b = text.lastIndexOf("}");
+    if (a < 0 || b <= a) throw new Error("model did not return JSON");
+    return JSON.parse(text.slice(a, b + 1));
+  }
+  function clampInt(v) { var n = Math.round(parseFloat(v)); return isFinite(n) ? Math.max(1, Math.min(5, n)) : 3; }
+
+  // ---- validation: same rules as judge.validate() ----
+  function validate(raw, c, ep) {
+    var flags = [], allowed = {}, s = raw.start_beat, e = raw.end_beat, fallback = false;
+    c.beat_ids.forEach(function (id) { allowed[id] = 1; });
+    if (!allowed[s] || !allowed[e]) { flags.push("boundary_id_invalid"); fallback = true; }
+    else {
+      var sb = ep._byId[s], eb = ep._byId[e];
+      if (sb.index >= eb.index) { flags.push("boundary_order_invalid"); fallback = true; }
+      else {
+        var dur = eb.end_s - sb.start_s;
+        if (dur < MIN_S || dur > MAX_S) { flags.push("duration_" + dur.toFixed(1) + "s_out_of_range"); fallback = true; }
+      }
+    }
+    if (fallback) { s = c.start_beat; e = c.end_beat; }
+    var j = {
+      c: c, ep: ep, keep: raw.keep !== false, reject_reason: raw.reject_reason || "",
+      start_beat: s, end_beat: e, start_s: ep._byId[s].start_s, end_s: ep._byId[e].end_s,
+      hook: String(raw.hook || "").trim(), cliffhanger: String(raw.cliffhanger || "").trim(),
+      why: String(raw.why_it_works || "").trim(),
+      h: clampInt(raw.hook_strength), cl: clampInt(raw.cliffhanger_strength),
+      st: clampInt(raw.standalone), sp: clampInt(raw.spoiler_risk), flags: flags
+    };
+    j.score = W.hook * j.h + W.cliff * j.cl + W.standalone * j.st + W.spoiler * j.sp;
+    return j;
+  }
+
+  async function judgeOne(cfg, c, ep) {
+    var user = buildPrompt(c, ep);
+    var text = await complete(cfg, user);
+    try { return validate(extractJson(text), c, ep); }
+    catch (e) {
+      text = await complete(cfg, user + "\n\nYour previous reply was not valid JSON. Reply with the JSON object only.");
+      return validate(extractJson(text), c, ep);
+    }
+  }
+
+  var judged = [];
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function f(sec) { return window.PF ? PF.fmt(sec) : fmtTs(sec); }
+  function sorted() { return judged.slice().sort(function (a, b) { return (b.keep - a.keep) || (b.score - a.score); }); }
+  function draw() {
+    $("ai-out").innerHTML = sorted().map(function (j, i) {
+      return "<details class='dcand jcard" + (j.keep ? "" : " rej") + "'" + (i < 3 && j.keep ? " open" : "") + ">" +
+        "<summary><span class='rk'>" + String(i + 1).padStart(2, "0") + "</span>" +
+        "<span class='tcode'>Ep " + String(j.ep.number).padStart(2, "0") + "  " + f(j.start_s) + "–" + f(j.end_s) + "</span>" +
+        "<span class='meta'>" + Math.round(j.end_s - j.start_s) + "s · score <b>" + j.score.toFixed(2) + "</b> · hook " + j.h +
+        " · cliff " + j.cl + " · standalone " + j.st + " · spoiler " + j.sp + "</span>" +
+        (j.keep ? "" : " <span class='flag'>rejected</span>") +
+        j.flags.map(function (x) { return " <span class='flag'>" + esc(x) + "</span>"; }).join("") +
+        "</summary><dl>" +
+        "<dt>Hook</dt><dd>" + esc(j.hook) + "</dd>" +
+        "<dt>Cliff</dt><dd>" + esc(j.cliffhanger) + "</dd>" +
+        "<dt>Why</dt><dd>" + esc(j.why) + "</dd>" +
+        (j.keep ? "" : "<dt>Reject</dt><dd>" + esc(j.reject_reason) + "</dd>") +
+        "<dt>Beats</dt><dd><code>" + esc(j.start_beat) + " → " + esc(j.end_beat) + "</code></dd>" +
+        "</dl></details>";
+    }).join("");
+    $("ai-csv").hidden = !judged.length;
+  }
+
+  async function run() {
+    var R = window.PF_RESULTS;
+    if (!R || !R.cands.length) { $("ai-hint").textContent = "Run “Find promos” first."; return; }
+    if (!ready()) {
+      $("ai-cfg").open = true; $("ai-key").focus();
+      $("ai-hint").innerHTML = "Pick a provider and model and paste an API key in <b>AI judge</b> above.";
+      return;
+    }
+    save();
+    var cfg = { provider: $("ai-provider").value, model: $("ai-model").value.trim(),
+                key: $("ai-key").value.trim(), base: $("ai-base").value.trim() };
+    var n = Math.max(1, Math.min(60, parseInt($("ai-n").value, 10) || 10));
+    var epBy = {};
+    R.episodes.forEach(function (ep) {
+      ep._byId = {}; ep.beats.forEach(function (b) { ep._byId[b.id] = b; });
+      epBy[ep.number + "|" + ep._file] = ep;
+    });
+    var todo = R.cands.slice(0, n), done = 0, errs = [], idx = 0;
+    judged = []; draw();
+    var btn = $("ai-run"); btn.disabled = true;
+    var tick = function () { $("ai-hint").textContent = "Judging with " + cfg.model + "… " + done + "/" + todo.length; };
+    tick();
+    async function worker() {
+      while (idx < todo.length) {
+        var c = todo[idx++], ep = epBy[c._ep + "|" + c._file];
+        try { judged.push(await judgeOne(cfg, c, ep)); draw(); }
+        catch (e) {
+          errs.push(e.message);
+          // Bad key / unknown model: stop rather than fail every clip.
+          if (e.status === 400 || e.status === 401 || e.status === 403 || e.status === 404) idx = todo.length;
+        }
+        done++; tick();
+      }
+    }
+    await Promise.all([worker(), worker(), worker()]);
+    btn.disabled = false;
+    var kept = judged.filter(function (j) { return j.keep; }).length;
+    $("ai-hint").innerHTML = judged.length
+      ? "Judged " + judged.length + " of " + todo.length + " with <b>" + esc(cfg.model) + "</b> · " + kept +
+        " kept, ranked with the same weights as the Python pipeline."
+      : "";
+    if (errs.length) $("ai-hint").innerHTML += "<div class='aierr'>" + errs.length + " failed. First error: " + esc(errs[0]) + "</div>";
+  }
+
+  function csv() {
+    var rows = [["rank", "episode", "start", "end", "duration_s", "keep", "hook", "cliffhanger", "why_it_works",
+                 "hook_strength", "cliffhanger_strength", "standalone", "spoiler_risk", "score", "start_beat", "end_beat", "flags"]];
+    sorted().forEach(function (j, i) {
+      rows.push([i + 1, j.ep.number, f(j.start_s), f(j.end_s), (j.end_s - j.start_s).toFixed(2), j.keep, j.hook, j.cliffhanger, j.why,
+                 j.h, j.cl, j.st, j.sp, j.score.toFixed(3), j.start_beat, j.end_beat, j.flags.join(";")]);
+    });
+    var body = rows.map(function (r) { return r.map(function (v) { v = String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }).join(","); }).join("\n");
+    var url = URL.createObjectURL(new Blob([body], { type: "text/csv" }));
+    var a = document.createElement("a"); a.href = url; a.download = "ai-judged-promos.csv";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  }
+
+  var p0 = sget("localStorage", KEY + "provider");
+  if (p0 && PROVIDERS[p0]) $("ai-provider").value = p0;
+  $("ai-base").value = sget("localStorage", KEY + "base") || "";
+  fillModels();
+  $("ai-provider").addEventListener("change", function () { save(); fillModels(); });
+  ["ai-model", "ai-key", "ai-base"].forEach(function (id) { $(id).addEventListener("input", save); });
+  $("ai-remember").addEventListener("change", save);
+  $("ai-run").addEventListener("click", run);
+  $("ai-csv").addEventListener("click", csv);
+  window.PF_AI = { buildPrompt: buildPrompt, validate: validate, extractJson: extractJson };
 })();
 </script>
 </body>
